@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Arcos Notícias - Minas Gerais</title>
-<meta name="description" content="Portal automático de notícias reais de Arcos MG e Minas Gerais, atualizado em tempo real. Inclui notícias recentes e antigas.">
-<meta name="keywords" content="Arcos MG, notícias Minas Gerais, portal de notícias, RSS, atualizações, política, esportes, economia">
+<title>Portal Notícias Brasil</title>
+<meta name="description" content="Portal de notícias do Brasil com categorias, fotos e atualização automática.">
+<meta name="keywords" content="notícias Brasil, política, esportes, economia, tecnologia, saúde, educação">
 
 <style>
 :root{
@@ -38,7 +38,12 @@ header{
   color:white;
   padding:25px;
   text-align:center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+header h1{
+  margin:0;
+  font-size:2em;
 }
 
 button{
@@ -46,7 +51,7 @@ button{
   border:none;
   border-radius:6px;
   cursor:pointer;
-  margin:5px;
+  margin-top:10px;
 }
 
 .primary{
@@ -58,8 +63,26 @@ button{
   background:var(--accent2);
 }
 
+nav{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:10px;
+  margin:20px 0;
+}
+
+nav button{
+  background:var(--accent);
+  color:white;
+  font-weight:bold;
+}
+
+nav button.active{
+  background:var(--accent2);
+}
+
 .container{
-  max-width:1000px;
+  max-width:1200px;
   margin:auto;
   padding:20px;
   display:grid;
@@ -69,47 +92,48 @@ button{
 
 .card{
   background:var(--card);
-  padding:20px;
   border-radius:12px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  transition: transform 0.3s, box-shadow 0.3s;
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+  overflow:hidden;
   display:flex;
   flex-direction:column;
+  transition:transform 0.3s, box-shadow 0.3s;
 }
 .card:hover{
   transform: translateY(-5px) rotateX(1deg);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.25);
+  box-shadow:0 15px 25px rgba(0,0,0,0.25);
 }
-
-.card a{
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+.card-content{
+  padding:15px;
+  display:flex;
+  flex-direction:column;
+  flex-grow:1;
+}
+.card-content h2{
+  font-size:1.2em;
+  margin:0 0 10px 0;
+}
+.card-content p{
+  flex-grow:1;
+}
+.card-content a{
   color:var(--accent);
-  text-decoration:none;
   font-weight:bold;
-  margin-top:auto;
+  margin-top:10px;
+  text-decoration:none;
 }
-.card a:hover{
+.card-content a:hover{
   text-decoration:underline;
 }
-
-.category{
-  display:inline-block;
-  padding:4px 10px;
-  border-radius:8px;
-  font-size:12px;
-  margin-bottom:10px;
-  font-weight:bold;
-  color:white;
-}
-
-.category.Segurança{background:#dc2626;}
-.category.Política{background:#9333ea;}
-.category.Esportes{background:#16a34a;}
-.category.Economia{background:#f59e0b;}
-.category.Educação{background:#2563eb;}
-.category.Outros{background:#6b7280;}
-
-small{
+.card-content small{
   color:gray;
+  margin-top:5px;
+  display:block;
 }
 
 footer{
@@ -122,7 +146,7 @@ footer{
 
 @media(max-width:600px){
   .container{
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
   }
 }
 </style>
@@ -130,17 +154,26 @@ footer{
 <body>
 
 <header>
-  <h1>📰 Portal Arcos Notícias</h1>
-  <p>Notícias reais de Arcos MG e Minas Gerais, incluindo antigas e recentes</p>
+  <h1>📰 Portal Notícias Brasil</h1>
+  <p>Notícias reais do Brasil, atualizadas automaticamente</p>
   <button onclick="toggleDark()">🌙 Modo Escuro</button>
 </header>
+
+<nav>
+  <button class="active" onclick="mudarCategoria('geral')">Geral</button>
+  <button onclick="mudarCategoria('politics')">Política</button>
+  <button onclick="mudarCategoria('sports')">Esportes</button>
+  <button onclick="mudarCategoria('business')">Economia</button>
+  <button onclick="mudarCategoria('technology')">Tecnologia</button>
+  <button onclick="mudarCategoria('health')">Saúde</button>
+</nav>
 
 <div class="container" id="noticias">
   <p>Carregando notícias...</p>
 </div>
 
 <footer>
-  © 2026 Portal Arcos Notícias - Minas Gerais
+  © 2026 Portal Notícias Brasil
 </footer>
 
 <script>
@@ -149,75 +182,65 @@ function toggleDark(){
   document.body.classList.toggle("dark");
 }
 
-// MULTI RSS SOURCES
-const RSS_SOURCES = [
-  "https://noticias-minas.webnode.page/rss/minas-gerais-.xml",
-  "https://g1.globo.com/rss/mg/minas-gerais/",
-  "https://www.otempo.com.br/cidades/mg/rss.xml"
-];
+// Categoria ativa
+let categoriaAtual = 'geral';
 
-// Categorias simples baseado em palavras-chave
-function definirCategoria(title, description){
-  const text = (title + " " + description).toLowerCase();
-  if(text.includes("polícia") || text.includes("crime") || text.includes("assalto")) return "Segurança";
-  if(text.includes("política") || text.includes("vereador") || text.includes("prefeitura")) return "Política";
-  if(text.includes("futebol") || text.includes("esporte") || text.includes("copa")) return "Esportes";
-  if(text.includes("economia") || text.includes("investimento") || text.includes("comércio")) return "Economia";
-  if(text.includes("escola") || text.includes("educação") || text.includes("universidade")) return "Educação";
-  return "Outros";
+// Mudar categoria
+function mudarCategoria(categoria){
+  categoriaAtual = categoria;
+  document.querySelectorAll('nav button').forEach(btn=>{
+    btn.classList.remove('active');
+    if(btn.textContent.toLowerCase() === categoria || (categoria==='geral' && btn.textContent==='Geral')) btn.classList.add('active');
+  });
+  carregarNoticias();
 }
 
-// BUSCAR NOTÍCIAS DE TODAS FONTES
-async function buscarNoticias() {
+// Função carregar notícias via NewsAPI (Brasil)
+async function carregarNoticias(){
   const container = document.getElementById("noticias");
   container.innerHTML = "<p>Atualizando notícias...</p>";
-
-  let todasNoticias = [];
-
-  for(const RSS_URL of RSS_SOURCES){
-    try{
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`;
-      const res = await fetch(apiUrl);
-      const data = await res.json();
-      if(data.items) todasNoticias = todasNoticias.concat(data.items);
-    } catch(e){
-      console.error("Erro RSS", RSS_URL, e);
+  
+  try{
+    let apiKey = "YOUR_API_KEY"; // substitua por sua chave do NewsAPI
+    let url = "";
+    
+    if(categoriaAtual==='geral'){
+      url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
+    } else {
+      url = `https://newsapi.org/v2/top-headlines?country=br&category=${categoriaAtual}&pageSize=20&apiKey=${apiKey}`;
     }
+
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    if(data.articles && data.articles.length>0){
+      container.innerHTML = "";
+      data.articles.forEach(n=>{
+        container.innerHTML += `
+        <div class="card">
+          ${n.urlToImage ? `<img src="${n.urlToImage}" alt="Notícia">` : ""}
+          <div class="card-content">
+            <h2>${n.title}</h2>
+            <p>${n.description || 'Sem resumo disponível.'}</p>
+            <a href="${n.url}" target="_blank">Ler notícia completa</a>
+            <small>Publicado em: ${new Date(n.publishedAt).toLocaleString()}</small>
+          </div>
+        </div>
+        `;
+      });
+    } else {
+      container.innerHTML = "<p>Não há notícias disponíveis nesta categoria.</p>";
+    }
+
+  } catch(err){
+    container.innerHTML = `<p>Erro ao carregar notícias: ${err}</p>`;
+    console.error(err);
   }
-
-  // Filtrar apenas notícias sobre Arcos
-  const noticiasArcos = todasNoticias.filter(item => 
-    (item.title && item.title.toLowerCase().includes("arcos")) ||
-    (item.description && item.description.toLowerCase().includes("arcos"))
-  );
-
-  // Ordenar por data (mais recentes primeiro)
-  noticiasArcos.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
-
-  // Renderizar todas, incluindo antigas
-  if(noticiasArcos.length === 0){
-    container.innerHTML = "<p>Não há notícias de Arcos MG no momento.</p>";
-    return;
-  }
-
-  container.innerHTML = "";
-  noticiasArcos.forEach(noticia => {
-    const categoria = definirCategoria(noticia.title, noticia.description || "");
-    container.innerHTML += `
-      <div class="card">
-        <span class="category ${categoria}">${categoria}</span>
-        <h2>${noticia.title}</h2>
-        <p>${noticia.description || 'Sem resumo disponível.'}</p>
-        <a href="${noticia.link}" target="_blank">Ler notícia completa</a>
-        <br><small>Publicado em: ${new Date(noticia.pubDate).toLocaleString()}</small>
-      </div>
-    `;
-  });
 }
 
-// Atualiza a cada 60 segundos (mantém notícias antigas também)
-buscarNoticias();
-setInterval(buscarNoticias, 60000);
+// Atualiza cada 60 segundos
+carregarNoticias();
+setInterval(carregarNoticias, 60000);
 </script>
 
 </body>
