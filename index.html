@@ -1,247 +1,254 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Notícias Brasil - Estilo G1</title>
-<meta name="description" content="Portal de notícias do Brasil, estilo G1, com categorias, notícias recentes e antigas, atualizado automaticamente com APIs públicas.">
-<style>
-:root{
-  --primary:#1e3a8a;
-  --bg:#f1f5f9;
-  --card:#ffffff;
-  --text:#111827;
-  --accent:#2563eb;
-  --accent2:#f59e0b;
-  --new-badge:#10b981;
-}
-.dark{
-  --bg:#0f172a;
-  --card:#1e293b;
-  --text:#f1f5f9;
-  --accent:#3b82f6;
-  --accent2:#fbbf24;
-  --new-badge:#34d399;
-}
-body{
-  margin:0;
-  font-family:'Arial', Helvetica, sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  transition:0.3s;
-}
-header{
-  background:var(--primary);
-  color:white;
-  padding:20px;
-  text-align:center;
-}
-header h1{margin:0;}
-button{padding:8px 15px;border:none;border-radius:6px;cursor:pointer;margin:5px;}
-.primary{background:var(--accent);color:white;}
-.primary:hover{background:var(--accent2);}
-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:15px 0;}
-nav button.active{background:var(--accent2);}
-section.section-destaque{
-  display:flex;
-  flex-wrap:wrap;
-  gap:20px;
-  padding:0 20px;
-}
-.section-destaque .card{
-  flex:1 1 48%;
-  max-height:400px;
-}
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:20px;
-}
-.card{
-  background:var(--card);
-  border-radius:12px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.15);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  transition:transform 0.3s,box-shadow 0.3s;
-}
-.card:hover{
-  transform:translateY(-5px) rotateX(1deg);
-  box-shadow:0 15px 25px rgba(0,0,0,0.25);
-}
-.card img{width:100%;height:180px;object-fit:cover;}
-.card-content{padding:15px;display:flex;flex-direction:column;flex-grow:1;}
-.card-content h2{font-size:1.2em;margin:0 0 10px 0;}
-.card-content p{flex-grow:1;}
-.card-content a{color:var(--accent);font-weight:bold;margin-top:10px;text-decoration:none;}
-.card-content a:hover{text-decoration:underline;}
-.card-content small{color:gray;margin-top:5px;display:block;}
-.badge-new{
-  display:inline-block;
-  background:var(--new-badge);
-  color:white;
-  font-size:0.8em;
-  padding:2px 6px;
-  border-radius:6px;
-  margin-left:5px;
-}
-footer{text-align:center;padding:20px;background:var(--primary);color:white;margin-top:40px;}
-@media(max-width:600px){
-  .container, .section-destaque{grid-template-columns:1fr;}
-  .section-destaque .card{flex:1 1 100%;}
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias Brasil</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: #e60000;
+            color: #fff;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 28px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: bold;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        main {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .hero-news {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .hero-news img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .hero-news .highlight {
+            flex: 2;
+        }
+
+        .hero-news .side-news {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .side-news article {
+            display: flex;
+            gap: 10px;
+        }
+
+        .side-news img {
+            width: 100px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        article {
+            background-color: #fff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        article:hover {
+            transform: translateY(-3px);
+        }
+
+        article img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #e60000;
+            margin-bottom: 10px;
+        }
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .categories a {
+            background-color: #e60000;
+            color: #fff;
+            padding: 10px 15px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .categories a:hover {
+            background-color: #b30000;
+        }
+
+        footer {
+            background-color: #222;
+            color: #fff;
+            text-align: center;
+            padding: 25px 10%;
+            margin-top: 50px;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .hero-news {
+                flex-direction: column;
+            }
+
+            .side-news {
+                flex-direction: row;
+                overflow-x: auto;
+            }
+
+            .side-news article {
+                flex: 0 0 auto;
+            }
+        }
+    </style>
 </head>
 <body>
+    <header>
+        <h1>Notícias Brasil</h1>
+        <nav>
+            <a href="#ultimas">Últimas</a>
+            <a href="#brasil">Brasil</a>
+            <a href="#mundo">Mundo</a>
+            <a href="#economia">Economia</a>
+            <a href="#esportes">Esportes</a>
+            <a href="#cultura">Cultura</a>
+        </nav>
+    </header>
 
-<header>
-  <h1>📰 Portal Notícias Brasil</h1>
-  <p>Portal estilo G1 com notícias recentes e antigas por categoria</p>
-  <button onclick="toggleDark()">🌙 Modo Escuro</button>
-</header>
+    <main>
+        <!-- Seção de notícias em destaque -->
+        <section class="hero-news">
+            <div class="highlight">
+                <article>
+                    <img src="https://via.placeholder.com/800x400" alt="Notícia em destaque">
+                    <h2>Notícia em Destaque do Brasil</h2>
+                    <p>Uma análise detalhada sobre os acontecimentos mais recentes no país, incluindo impactos sociais e econômicos.</p>
+                </article>
+            </div>
+            <div class="side-news">
+                <article>
+                    <img src="https://via.placeholder.com/100x70" alt="Notícia lateral 1">
+                    <div>
+                        <h2>Notícia Lateral 1</h2>
+                        <p>Resumo rápido da notícia mais relevante.</p>
+                    </div>
+                </article>
+                <article>
+                    <img src="https://via.placeholder.com/100x70" alt="Notícia lateral 2">
+                    <div>
+                        <h2>Notícia Lateral 2</h2>
+                        <p>Resumo rápido da notícia mais relevante.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-<nav>
-  <button class="active" onclick="mudarCategoria('todas')">Todas</button>
-  <button onclick="mudarCategoria('politics')">Política</button>
-  <button onclick="mudarCategoria('sports')">Esportes</button>
-  <button onclick="mudarCategoria('health')">Saúde</button>
-  <button onclick="mudarCategoria('technology')">Tecnologia</button>
-</nav>
+        <!-- Categorias -->
+        <section class="categories">
+            <a href="#ultimas">Últimas Notícias</a>
+            <a href="#brasil">Brasil</a>
+            <a href="#mundo">Mundo</a>
+            <a href="#economia">Economia</a>
+            <a href="#esportes">Esportes</a>
+            <a href="#cultura">Cultura</a>
+            <a href="#tecnologia">Tecnologia</a>
+            <a href="#saude">Saúde</a>
+        </section>
 
-<section class="section-destaque" id="destaques">
-  <!-- Notícias em destaque vão aqui -->
-</section>
+        <!-- Notícias recentes -->
+        <section id="ultimas">
+            <h2>Últimas Notícias</h2>
+            <article>
+                <img src="https://via.placeholder.com/800x400" alt="Notícia recente 1">
+                <h2>Economia brasileira cresce no último trimestre</h2>
+                <p>Dados recentes mostram um crescimento consistente da economia, impulsionado pelo setor de tecnologia e serviços.</p>
+            </article>
+            <article>
+                <img src="https://via.placeholder.com/800x400" alt="Notícia recente 2">
+                <h2>Esportes: Seleção Brasileira conquista título</h2>
+                <p>Após uma partida emocionante, a seleção nacional garantiu mais um título importante para o país.</p>
+            </article>
+            <article>
+                <img src="https://via.placeholder.com/800x400" alt="Notícia recente 3">
+                <h2>Cultura: Festival de Cinema em São Paulo</h2>
+                <p>O festival reúne cineastas de todo o Brasil e promove debates sobre o cinema nacional.</p>
+            </article>
+        </section>
 
-<div class="container" id="noticias">
-  <p>Carregando notícias...</p>
-</div>
+        <!-- Notícias antigas -->
+        <section id="arquivo">
+            <h2>Notícias Antigas</h2>
+            <article>
+                <img src="https://via.placeholder.com/800x400" alt="Notícia antiga 1">
+                <h2>Reformas políticas importantes do passado</h2>
+                <p>Uma retrospectiva sobre as mudanças políticas que moldaram o Brasil moderno.</p>
+            </article>
+            <article>
+                <img src="https://via.placeholder.com/800x400" alt="Notícia antiga 2">
+                <h2>Desastres naturais marcantes</h2>
+                <p>Recordando os eventos naturais que tiveram grande impacto no país.</p>
+            </article>
+        </section>
+    </main>
 
-<footer>© 2026 Portal Notícias Brasil</footer>
-
-<script>
-// Dark mode
-function toggleDark(){document.body.classList.toggle("dark");}
-
-// Categoria ativa
-let categoriaAtual = 'todas';
-let todasNoticias = [];
-
-// Mudar categoria
-function mudarCategoria(categoria){
-  categoriaAtual = categoria;
-  document.querySelectorAll('nav button').forEach(btn=>{
-    btn.classList.remove('active');
-    if((categoria==='todas' && btn.textContent==='Todas') || btn.textContent.toLowerCase()===categoria) btn.classList.add('active');
-  });
-  renderizarNoticias();
-}
-
-// Função para carregar notícias via NewsAPI
-async function carregarNoticias(){
-  try{
-    const apiKey = "YOUR_API_KEY"; // Substitua por sua chave NewsAPI
-    const categoriasAPI = ['politics','sports','health','technology'];
-
-    let novasNoticias = [];
-
-    // Buscar notícias por categoria
-    for(let cat of categoriasAPI){
-      let url = `https://newsapi.org/v2/top-headlines?country=br&category=${cat}&pageSize=50&apiKey=${apiKey}`;
-      let res = await fetch(url);
-      let data = await res.json();
-      if(data.articles){
-        data.articles.forEach(n=>{
-          n.categoria = cat;
-          novasNoticias.push(n);
-        });
-      }
-    }
-
-    // Notícias gerais (Todas)
-    let urlGeral = `https://newsapi.org/v2/top-headlines?country=br&pageSize=50&apiKey=${apiKey}`;
-    let resG = await fetch(urlGeral);
-    let dataG = await resG.json();
-    if(dataG.articles){
-      dataG.articles.forEach(n=>{
-        n.categoria = 'todas';
-        novasNoticias.push(n);
-      });
-    }
-
-    // Evita duplicados
-    novasNoticias.forEach(n=>{
-      if(!todasNoticias.some(a=>a.url===n.url)) todasNoticias.push(n);
-    });
-
-    // Ordena por data decrescente
-    todasNoticias.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
-
-    renderizarDestaques();
-    renderizarNoticias();
-
-  }catch(err){
-    document.getElementById("noticias").innerHTML = `<p>Erro ao carregar notícias: ${err}</p>`;
-    console.error(err);
-  }
-}
-
-// Renderiza destaques (primeiras 2 notícias de cada categoria)
-function renderizarDestaques(){
-  const destaqueContainer = document.getElementById("destaques");
-  destaqueContainer.innerHTML = '';
-  const destaquePorCategoria = ['politics','sports','health','technology'];
-  destaquePorCategoria.forEach(cat=>{
-    const primeira = todasNoticias.find(n=>n.categoria===cat);
-    if(primeira){
-      const pubDate = new Date(primeira.publishedAt);
-      const isNew = (new Date() - pubDate) < 1000*60*60*12;
-      destaqueContainer.innerHTML += `
-      <div class="card">
-        ${primeira.urlToImage ? `<img src="${primeira.urlToImage}" alt="Notícia">` : ""}
-        <div class="card-content">
-          <h2>${primeira.title} ${isNew?'<span class="badge-new">Novo</span>':''}</h2>
-          <p>${primeira.description||'Sem resumo disponível.'}</p>
-          <a href="${primeira.url}" target="_blank">Ler notícia completa</a>
-          <small>Publicado em: ${pubDate.toLocaleString()}</small>
-        </div>
-      </div>`;
-    }
-  });
-}
-
-// Renderiza notícias restantes
-function renderizarNoticias(){
-  const container = document.getElementById("noticias");
-  let noticiasFiltradas = categoriaAtual==='todas'? todasNoticias : todasNoticias.filter(n=>n.categoria===categoriaAtual);
-  if(noticiasFiltradas.length===0){
-    container.innerHTML = "<p>Não há notícias disponíveis nesta categoria.</p>";
-    return;
-  }
-  const now = new Date();
-  container.innerHTML = noticiasFiltradas.map(n=>{
-    const pubDate = new Date(n.publishedAt);
-    const isNew = (now - pubDate) < 1000*60*60*12;
-    return `
-    <div class="card">
-      ${n.urlToImage ? `<img src="${n.urlToImage}" alt="Notícia">` : ""}
-      <div class="card-content">
-        <h2>${n.title} ${isNew?'<span class="badge-new">Novo</span>':''}</h2>
-        <p>${n.description||'Sem resumo disponível.'}</p>
-        <a href="${n.url}" target="_blank">Ler notícia completa</a>
-        <small>Publicado em: ${pubDate.toLocaleString()}</small>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-// Atualiza notícias a cada 5 minutos
-carregarNoticias();
-setInterval(carregarNoticias,300000);
-
-</script>
+    <footer>
+        <p>© 2026 Notícias Brasil. Todos os direitos reservados.</p>
+        <p><a href="#" style="color:#fff; text-decoration:underline;">Política de Privacidade</a> | <a href="#" style="color:#fff; text-decoration:underline;">Contato</a></p>
+    </footer>
 </body>
 </html>
