@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcos Notícias - Portal Automático</title>
+
+<meta name="description" content="Portal automático de notícias da cidade de Arcos MG atualizado por bot inteligente.">
+<meta name="keywords" content="Arcos MG, notícias Arcos, portal Arcos Minas Gerais">
+
+<style>
+:root{
+  --primary:#1e3a8a;
+  --bg:#f1f5f9;
+  --card:#ffffff;
+  --text:#111827;
+}
+
+.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#f1f5f9;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:0.3s;
+}
+
+header{
+  background:var(--primary);
+  color:white;
+  padding:25px;
+  text-align:center;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:6px;
+  cursor:pointer;
+  margin:5px;
+}
+
+.primary{
+  background:#2563eb;
+  color:white;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:var(--card);
+  padding:20px;
+  margin-bottom:20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+  animation:fade 0.4s ease-in;
+}
+
+small{
+  color:gray;
+}
+
+.admin{
+  background:#e2e8f0;
+  padding:15px;
+  margin:20px 0;
+  border-radius:8px;
+}
+
+footer{
+  text-align:center;
+  padding:20px;
+  background:var(--primary);
+  color:white;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>📰 Portal Arcos Notícias</h1>
+  <p>Notícias automáticas da cidade de Arcos - MG</p>
+  <button class="primary" onclick="gerarNoticia()">Gerar Notícia</button>
+  <button onclick="toggleDark()">🌙 Modo Escuro</button>
+</header>
+
+<div class="container">
+
+  <!-- Espaço Ads -->
+  <div class="card">
+    <h3>Publicidade</h3>
+    <!-- Cole aqui código Google AdSense -->
+    <p>Espaço reservado para monetização.</p>
+  </div>
+
+  <!-- Painel Admin -->
+  <div class="admin">
+    <h3>Painel Admin</h3>
+    <button onclick="limparNoticias()">Limpar Notícias</button>
+    <button onclick="exportar()">Exportar Banco</button>
+    <button onclick="importar()">Importar Banco</button>
+  </div>
+
+  <div id="noticias"></div>
+
+</div>
+
+<footer>
+  © 2026 Portal Automático - Arcos MG | Visualizações: <span id="views"></span>
+</footer>
+
+<script>
+
+// CONTADOR DE VISITAS
+let views = localStorage.getItem("views") || 0;
+views++;
+localStorage.setItem("views", views);
+document.getElementById("views").innerText = views;
+
+// BANCO LOCAL
+let banco = JSON.parse(localStorage.getItem("noticias")) || [];
+
+// DADOS BOT
+const bairros = ["Centro","Brasília","São Judas","Niterói","Bela Vista","Esplanada"];
+const temas = ["Economia","Segurança","Política","Educação","Infraestrutura","Esportes"];
+const eventos = [
+"recebe novos investimentos",
+"passa por melhorias urbanas",
+"registra crescimento comercial",
+"ganha novo projeto social",
+"tem evento comunitário de destaque",
+"recebe ação estratégica da prefeitura"
+];
+
+// GERAR NOTÍCIA AUTOMÁTICA
+function gerarNoticia(){
+  const bairro = bairros[Math.floor(Math.random()*bairros.length)];
+  const tema = temas[Math.floor(Math.random()*temas.length)];
+  const evento = eventos[Math.floor(Math.random()*eventos.length)];
+
+  const noticia = {
+    titulo: tema + " em Arcos MG",
+    conteudo: "O bairro " + bairro + " " + evento +
+              ". Autoridades locais destacam impacto positivo para o desenvolvimento da cidade.",
+    data: new Date().toLocaleString()
+  };
+
+  banco.unshift(noticia);
+  salvar();
+  render();
+}
+
+// SALVAR LOCAL
+function salvar(){
+  localStorage.setItem("noticias", JSON.stringify(banco));
+}
+
+// RENDERIZAR
+function render(){
+  const container = document.getElementById("noticias");
+  container.innerHTML = "";
+
+  banco.forEach(n=>{
+    container.innerHTML += `
+      <div class="card">
+        <h2>${n.titulo}</h2>
+        <p>${n.conteudo}</p>
+        <small>${n.data}</small>
+      </div>
+    `;
+  });
+}
+
+// LIMPAR
+function limparNoticias(){
+  banco=[];
+  salvar();
+  render();
+}
+
+// EXPORTAR
+function exportar(){
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(banco));
+  const a = document.createElement("a");
+  a.href = dataStr;
+  a.download = "backup_arcos_noticias.json";
+  a.click();
+}
+
+// IMPORTAR
+function importar(){
+  const input = document.createElement("input");
+  input.type="file";
+  input.accept="application/json";
+  input.onchange = e=>{
+    const reader = new FileReader();
+    reader.onload = ()=>{
+      banco = JSON.parse(reader.result);
+      salvar();
+      render();
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+  input.click();
+}
+
+// DARK MODE
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+// AUTO BOT (gera notícia a cada 60 segundos)
+setInterval(gerarNoticia,60000);
+
+// Inicialização
+render();
+
+</script>
+
+</body>
+</html>
