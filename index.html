@@ -3,100 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal Brasil Notícias</title>
+    <title>Portal Brasil Notícias - Realidade Brasileira</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-        header { background: #222; color: #fff; padding: 20px 0; text-align: center; }
-        nav a { margin: 0 15px; color: #fff; text-decoration: none; font-weight: bold; }
-        .container { width: 90%; margin: 20px auto; }
-        .section-title { font-size: 1.8em; margin-bottom: 10px; color: #333; }
-        .news-item { border-bottom: 1px solid #ccc; padding: 15px 0; }
-        .news-item h3 { margin: 0 0 5px; color: #0056b3; }
-        .news-item p { margin: 0; color: #555; }
-        footer { text-align: center; padding: 15px 0; background: #222; color: #fff; margin-top: 30px; }
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eef2f5;
+            color: #222;
+        }
+
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 25px 0;
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 10px;
+            background: #00509e;
+        }
+
+        nav a {
+            color: #fff;
+            margin: 0 14px;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #ffdd00;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px auto;
+            width: 90%;
+            gap: 20px;
+        }
+
+        main {
+            flex: 3;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 18px;
+            margin-bottom: 22px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .section-title {
+            font-size: 1.7em;
+            border-bottom: 3px solid #00509e;
+            padding-bottom: 4px;
+            margin-bottom: 12px;
+        }
+
+        .news-item {
+            border-bottom: 1px solid #ccc;
+            padding: 12px 0;
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .news-item h3 {
+            margin: 0;
+            color: #00509e;
+            font-size: 1.3em;
+        }
+
+        .news-item p {
+            margin: 6px 0;
+        }
+
+        .news-item small {
+            color: #555;
+            font-size: 0.9em;
+        }
+
+        aside {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 18px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        aside h3 {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #00509e;
+        }
+
+        aside ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        aside ul li {
+            margin: 8px 0;
+        }
+
+        aside ul li a {
+            color: #333;
+        }
+
+        aside ul li a:hover {
+            text-decoration: underline;
+            color: #00509e;
+        }
+
+        footer {
+            background-color: #003366;
+            color: #fff;
+            text-align: center;
+            padding: 15px;
+            margin-top: 25px;
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: 0.9em;
+        }
+
+        @media(max-width: 900px) {
+            .container {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Portal Brasil Notícias</h1>
-    <nav>
-        <a href="#atual">Últimas Notícias</a>
-        <a href="#historia">História do Brasil</a>
-        <a href="#arquivo">Arquivo & Curiosidades</a>
-    </nav>
+    Portal Brasil Notícias
 </header>
+
+<nav>
+    <a href="#atualidade">Atualidade</a>
+    <a href="#historico">Histórico</a>
+    <a href="#politica">Política</a>
+    <a href="#economia">Economia</a>
+    <a href="#esportes">Esportes</a>
+</nav>
 
 <div class="container">
 
-    <!-- Seção de Notícias Atuais -->
-    <section id="atual">
-        <h2 class="section-title">📰 Últimas Notícias (Atual)</h2>
+    <main>
 
-        <div class="news-item">
-            <h3>Justiça condena responsáveis pelo assassinato de Marielle Franco</h3>
-            <p>Em fevereiro de 2026, o Supremo Tribunal Federal do Brasil condenou irmãos políticos e ex‑policiais pela morte da vereadora e ativista Marielle Franco em 2018, determinando penas acima de 76 anos de prisão e marcando um importante capítulo na luta contra a violência política no país. :contentReference[oaicite:0]{index=0}</p>
-        </div>
+        <!-- Notícias Recentes -->
+        <section id="atualidade">
+            <h2 class="section-title">📰 Notícias Recentes – Baseado em Fatos Reais</h2>
 
-        <div class="news-item">
-            <h3>Protestos indígenas levam Lula a revogar decreto sobre hidrovias</h3>
-            <p>Após 33 dias de protestos indígenas no Pará, o governo federal revogou um decreto que permitia concessões privadas para hidrovias na Amazônia, reconhecendo riscos ambientais e pressionado por lideranças indígenas. :contentReference[oaicite:1]{index=1}</p>
-        </div>
+            <div class="news-item">
+                <h3>Justiça condena responsáveis pelo assassinato de Marielle Franco</h3>
+                <p>Em fevereiro de 2026, o Supremo Tribunal Federal condenou dois irmãos políticos e um ex‑policial por duplo homicídio pelo assassinato da vereadora Marielle Franco e de seu motorista Anderson Gomes em 2018. As sentenças ultrapassam 76 anos de prisão, marcando um marco no combate à violência política no Brasil.</p>
+                <small>Fonte: Financial Times, The Guardian, Washington Post (fev. 2026) :contentReference[oaicite:2]{index=2}</small>
+            </div>
 
-        <div class="news-item">
-            <h3>Deslizamentos em Minas Gerais deixam dezenas de mortos</h3>
-            <p>Chuvas intensas causaram deslizamentos em Juiz de Fora e Ubá, em Minas Gerais, resultando em dezenas de mortos e dezenas de desaparecidos, enquanto o governo federal declarou situação de calamidade pública. :contentReference[oaicite:2]{index=2}</p>
-        </div>
+            <div class="news-item">
+                <h3>Inundações e deslizamentos em Minas Gerais deixam dezenas de mortos</h3>
+                <p>Chuvas intensas na região sudeste resultaram em enchentes e deslizamentos em Juiz de Fora e Ubá, Minas Gerais, causando dezenas de mortes e dezenas de desaparecidos. Autoridades federais declararam estado de calamidade pública.</p>
+                <small>Fonte: Reuters, People (fev. 2026) :contentReference[oaicite:3]{index=3}</small>
+            </div>
 
-    </section>
+            <div class="news-item">
+                <h3>Protestos indígenas forçam revogação de decreto sobre hidrovias na Amazônia</h3>
+                <p>Após mais de um mês de protestos liderados por povos indígenas no Pará, o governo federal revogou um decreto que permitia concessões privadas em hidrovias na Amazônia, em uma vitória para lideranças indígenas e ambientalistas.</p>
+                <small>Fonte: AP News (fev. 2026) :contentReference[oaicite:4]{index=4}</small>
+            </div>
 
-    <!-- Seção de Notícias Históricas -->
-    <section id="historia">
-        <h2 class="section-title">📜 Notícias Históricas / Eventos Importantes</h2>
+            <div class="news-item">
+                <h3>Brasil celebra fim de tarifas dos EUA sobre aeronaves brasileiras</h3>
+                <p>O governo brasileiro comemorou a eliminação de tarifas dos Estados Unidos para aeronaves brasileiras, beneficiando especialmente o setor aeroespacial nacional — incluindo a Embraer e outras exportações industriais.</p>
+                <small>Fonte: Reuters (fev. 2026) :contentReference[oaicite:5]{index=5}</small>
+            </div>
+        </section>
 
-        <div class="news-item">
-            <h3>Independência do Brasil (1822)</h3>
-            <p>O Brasil declarou sua independência de Portugal em 7 de setembro de 1822, evento que culminou na formação do Império do Brasil sob o comando de Dom Pedro I e é lembrado como marco fundador da nação. :contentReference[oaicite:3]{index=3}</p>
-        </div>
+        <!-- Política e Sociedade -->
+        <section id="politica">
+            <h2 class="section-title">🏛️ Política e Sociedade</h2>
 
-        <div class="news-item">
-            <h3>Revolução de 1930</h3>
-            <p>A Revolução de 1930 foi uma insurreição armada que pôs fim à Primeira República brasileira e levou Getúlio Vargas ao poder, alterando profundamente a política nacional na primeira metade do século XX. :contentReference[oaicite:4]{index=4}</p>
-        </div>
+            <div class="news-item">
+                <h3>Grande operação policial no Rio deixa dezenas de mortos e inúmeros presos</h3>
+                <p>Uma das maiores operações policiais no Complexo do Alemão e Penha resultou em pelo menos 64 mortos e mais de 80 presos em confrontos com organizações criminosas no Rio de Janeiro.</p>
+                <small>Fonte: AP News, The Guardian (out. 2025) :contentReference[oaicite:6]{index=6}</small>
+            </div>
 
-        <div class="news-item">
-            <h3>Batalha da Praça da Sé (1934)</h3>
-            <p>O conflito entre integralistas e antifascistas em São Paulo em 1934 simbolizou tensões políticas crescentes no país, com confrontos e feridos nas ruas da capital paulista. :contentReference[oaicite:5]{index=5}</p>
-        </div>
+            <div class="news-item">
+                <h3>Bolsonaro é preso semanas antes de cumprir pena</h3>
+                <p>Segundo relatos internacionais, o ex‑presidente Jair Bolsonaro foi detido por envolvimento em um plano de golpe e outras acusações ligadas à tentativa de manter poder após a eleição de 2022, gerando debates intensos no país.</p>
+                <small>Fonte: CBS News (indicativo recente) :contentReference[oaicite:7]{index=7}</small>
+            </div>
+        </section>
 
-        <div class="news-item">
-            <h3>Canal 100: Cinejornais icônicos</h3>
-            <p>O Canal 100, criado em 1959, foi um cinejornal brasileiro exibido nos cinemas e registrou momentos culturais e esportivos importantes do país, deixando um legado histórico audiovisual. :contentReference[oaicite:6]{index=6}</p>
-        </div>
+        <!-- Histórico Brasileiro -->
+        <section id="historico">
+            <h2 class="section-title">📜 Eventos Históricos Importantes no Brasil</h2>
 
-    </section>
+            <div class="news-item">
+                <h3>2024 – Ataque a bomba em Brasília</h3>
+                <p>Em 13 de novembro de 2024, duas explosões ocorreram na Praça dos Três Poderes, levando à evacuação da área e mobilização de segurança. O autor, um candidato frustrado, morreu no local e foi motivado por ideologias extremistas.</p>
+                <small>Fonte: Wikipédia – 2024 Brasília attack :contentReference[oaicite:8]{index=8}</small>
+            </div>
 
-    <!-- Seção de Arquivo & Curiosidades -->
-    <section id="arquivo">
-        <h2 class="section-title">📦 Arquivo & Curiosidades</h2>
+            <div class="news-item">
+                <h3>Dia Nacional de Zumbi e da Consciência Negra</h3>
+                <p>Celebrado anualmente em 20 de novembro, esta data homenageia a cultura afro‑brasileira e debate temas de igualdade social e antirracismo, com raízes na luta histórica dos Palmares.</p>
+                <small>Fonte: Wikipédia – Zumbi e Consciência Negra :contentReference[oaicite:9]{index=9}</small>
+            </div>
 
-        <div class="news-item">
-            <h3>Diario de Pernambuco: quase 200 anos de história</h3>
-            <p>O Diário de Pernambuco, fundado em 1825, é reconhecido como um dos jornais mais antigos em circulação na América Latina e seu arquivo histórico está em processo de preservação. :contentReference[oaicite:7]{index=7}</p>
-        </div>
+            <div class="news-item">
+                <h3>"A Voz do Brasil" — O noticiário mais antigo</h3>
+                <p>Lançado em 1935 como “Programa Nacional”, este noticiário radiofônico estatal é considerado um dos mais antigos em operação contínua no Brasil, com presença constante em rádios desde então.</p>
+                <small>Fonte: Wikipédia – A Voz do Brasil :contentReference[oaicite:10]{index=10}</small>
+            </div>
+        </section>
 
-        <div class="news-item">
-            <h3>Dia da Consciência Negra</h3>
-            <p>Celebrado em 20 de novembro, o Dia da Consciência Negra homenageia Zumbi dos Palmares e é uma data nacional voltada à reflexão sobre a contribuição afro‑brasileira e a luta contra o racismo. :contentReference[oaicite:8]{index=8}</p>
-        </div>
+    </main>
 
-        <div class="news-item">
-            <h3>Folha de S.Paulo: 100 anos de história</h3>
-            <p>O jornal Folha de S.Paulo celebrou seu centenário com um acervo histórico que retrata os principais acontecimentos do século XX no Brasil, reforçando a importância do jornalismo nacional. :contentReference[oaicite:9]{index=9}</p>
-        </div>
+    <!-- Barra Lateral -->
+    <aside>
+        <h3>Seções Rápidas</h3>
+        <ul>
+            <li><a href="#atualidade">Atualidade</a></li>
+            <li><a href="#politica">Política</a></li>
+            <li><a href="#historico">Histórico</a></li>
+            <li><a href="#economia">Economia</a></li>
+            <li><a href="#esportes">Esportes</a></li>
+        </ul>
 
-    </section>
+        <h3>Destaques do Brasil</h3>
+        <ul>
+            <li><a href="#">COP30 Clima no Pará</a></li>
+            <li><a href="#">Mercosul e relações exteriores</a></li>
+            <li><a href="#">Desastres naturais e clima</a></li>
+        </ul>
 
+        <h3>Outros Temas</h3>
+        <ul>
+            <li><a href="#">Cultura & Arte</a></li>
+            <li><a href="#">Tecnologia Brasileira</a></li>
+            <li><a href="#">Ciência e Inovação</a></li>
+        </ul>
+
+    </aside>
 </div>
 
 <footer>
