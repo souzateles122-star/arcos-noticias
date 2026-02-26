@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Notícias Brasil - Todas as notícias</title>
+<title>Portal Notícias Brasil - Completo</title>
+<meta name="description" content="Portal de notícias do Brasil com categorias, fotos, notícias recentes e antigas, atualizado automaticamente com APIs públicas.">
 <style>
 :root{
   --primary:#1e3a8a;
@@ -12,6 +13,7 @@
   --text:#111827;
   --accent:#2563eb;
   --accent2:#f59e0b;
+  --new-badge:#10b981;
 }
 .dark{
   --bg:#0f172a;
@@ -19,6 +21,7 @@
   --text:#f1f5f9;
   --accent:#3b82f6;
   --accent2:#fbbf24;
+  --new-badge:#34d399;
 }
 body{
   margin:0;
@@ -33,33 +36,12 @@ header{
   padding:25px;
   text-align:center;
 }
-header h1{
-  margin:0;
-}
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:6px;
-  cursor:pointer;
-  margin:5px;
-}
-.primary{
-  background:var(--accent);
-  color:white;
-}
-.primary:hover{
-  background:var(--accent2);
-}
-nav{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:10px;
-  margin:20px 0;
-}
-nav button.active{
-  background:var(--accent2);
-}
+header h1{margin:0;}
+button{padding:10px 15px;border:none;border-radius:6px;cursor:pointer;margin:5px;}
+.primary{background:var(--accent);color:white;}
+.primary:hover{background:var(--accent2);}
+nav{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:20px 0;}
+nav button.active{background:var(--accent2);}
 .container{
   max-width:1200px;
   margin:auto;
@@ -75,78 +57,49 @@ nav button.active{
   overflow:hidden;
   display:flex;
   flex-direction:column;
-  transition:transform 0.3s, box-shadow 0.3s;
+  transition:transform 0.3s,box-shadow 0.3s;
 }
 .card:hover{
   transform:translateY(-5px) rotateX(1deg);
   box-shadow:0 15px 25px rgba(0,0,0,0.25);
 }
-.card img{
-  width:100%;
-  height:180px;
-  object-fit:cover;
-}
-.card-content{
-  padding:15px;
-  display:flex;
-  flex-direction:column;
-  flex-grow:1;
-}
-.card-content h2{
-  font-size:1.2em;
-  margin:0 0 10px 0;
-}
-.card-content p{
-  flex-grow:1;
-}
-.card-content a{
-  color:var(--accent);
-  font-weight:bold;
-  margin-top:10px;
-  text-decoration:none;
-}
-.card-content a:hover{
-  text-decoration:underline;
-}
-.card-content small{
-  color:gray;
-  margin-top:5px;
-  display:block;
-}
-footer{
-  text-align:center;
-  padding:20px;
-  background:var(--primary);
+.card img{width:100%;height:180px;object-fit:cover;}
+.card-content{padding:15px;display:flex;flex-direction:column;flex-grow:1;}
+.card-content h2{font-size:1.2em;margin:0 0 10px 0;}
+.card-content p{flex-grow:1;}
+.card-content a{color:var(--accent);font-weight:bold;margin-top:10px;text-decoration:none;}
+.card-content a:hover{text-decoration:underline;}
+.card-content small{color:gray;margin-top:5px;display:block;}
+.badge-new{
+  display:inline-block;
+  background:var(--new-badge);
   color:white;
-  margin-top:40px;
+  font-size:0.8em;
+  padding:2px 6px;
+  border-radius:6px;
+  margin-left:5px;
 }
-@media(max-width:600px){
-  .container{
-    grid-template-columns:1fr;
-  }
-}
+footer{text-align:center;padding:20px;background:var(--primary);color:white;margin-top:40px;}
+@media(max-width:600px){.container{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
 <header>
   <h1>📰 Portal Notícias Brasil</h1>
-  <p>Notícias recentes e antigas, com fotos e categorias</p>
+  <p>Notícias recentes e antigas com categorias próprias e atualização automática</p>
   <button onclick="toggleDark()">🌙 Modo Escuro</button>
 </header>
 <nav>
   <button class="active" onclick="mudarCategoria('todas')">Todas</button>
   <button onclick="mudarCategoria('politics')">Política</button>
   <button onclick="mudarCategoria('sports')">Esportes</button>
-  <button onclick="mudarCategoria('business')">Economia</button>
-  <button onclick="mudarCategoria('technology')">Tecnologia</button>
   <button onclick="mudarCategoria('health')">Saúde</button>
+  <button onclick="mudarCategoria('technology')">Tecnologia</button>
 </nav>
 <div class="container" id="noticias">
   <p>Carregando notícias...</p>
 </div>
-<footer>
-  © 2026 Portal Notícias Brasil
-</footer>
+<footer>© 2026 Portal Notícias Brasil</footer>
 
 <script>
 // DARK MODE
@@ -167,39 +120,55 @@ function mudarCategoria(categoria){
   renderizarNoticias();
 }
 
-// Carregar notícias da API NewsAPI
+// Função para buscar notícias via NewsAPI
 async function carregarNoticias(){
   try{
-    let apiKey = "YOUR_API_KEY"; // substitua por sua chave NewsAPI
-    let categoriasAPI = ['politics','sports','business','technology','health'];
-    
+    const apiKey = "YOUR_API_KEY"; // Substitua pela sua chave NewsAPI
+    const categoriasAPI = ['politics','sports','health','technology'];
+
+    let novasNoticias = [];
+
+    // Busca notícias por categoria
     for(let cat of categoriasAPI){
       let url = `https://newsapi.org/v2/top-headlines?country=br&category=${cat}&pageSize=50&apiKey=${apiKey}`;
       let res = await fetch(url);
       let data = await res.json();
-      if(data.articles) {
-        data.articles.forEach(n=>{n.categoria=cat; todasNoticias.push(n);});
+      if(data.articles){
+        data.articles.forEach(n=>{
+          n.categoria = cat;
+          novasNoticias.push(n);
+        });
       }
     }
 
-    // Também carrega notícias gerais
+    // Notícias gerais (para “todas”)
     let urlGeral = `https://newsapi.org/v2/top-headlines?country=br&pageSize=50&apiKey=${apiKey}`;
     let resG = await fetch(urlGeral);
     let dataG = await resG.json();
-    if(dataG.articles) dataG.articles.forEach(n=>{n.categoria='todas'; todasNoticias.push(n);});
+    if(dataG.articles){
+      dataG.articles.forEach(n=>{
+        n.categoria = 'todas';
+        novasNoticias.push(n);
+      });
+    }
+
+    // Filtrar duplicadas
+    novasNoticias.forEach(n=>{
+      if(!todasNoticias.some(a=>a.url===n.url)) todasNoticias.push(n);
+    });
 
     // Ordena todas por data decrescente
-    todasNoticias.sort((a,b)=> new Date(b.publishedAt)-new Date(a.publishedAt));
-    
+    todasNoticias.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
+
     renderizarNoticias();
-    
+
   }catch(err){
     document.getElementById("noticias").innerHTML = `<p>Erro ao carregar notícias: ${err}</p>`;
     console.error(err);
   }
 }
 
-// Renderizar notícias filtrando por categoria
+// Renderizar notícias filtradas por categoria e adicionar badge “novo” se a notícia tiver menos de 12 horas
 function renderizarNoticias(){
   const container = document.getElementById("noticias");
   let noticiasFiltradas = categoriaAtual==='todas' ? todasNoticias : todasNoticias.filter(n=>n.categoria===categoriaAtual);
@@ -207,20 +176,25 @@ function renderizarNoticias(){
     container.innerHTML = "<p>Não há notícias disponíveis nesta categoria.</p>";
     return;
   }
-  container.innerHTML = noticiasFiltradas.map(n=>`
+  const now = new Date();
+  container.innerHTML = noticiasFiltradas.map(n=>{
+    const pubDate = new Date(n.publishedAt);
+    const isNew = (now - pubDate) < 1000*60*60*12; // menos de 12h
+    return `
     <div class="card">
       ${n.urlToImage ? `<img src="${n.urlToImage}" alt="Notícia">` : ""}
       <div class="card-content">
-        <h2>${n.title}</h2>
+        <h2>${n.title} ${isNew ? '<span class="badge-new">Novo</span>' : ''}</h2>
         <p>${n.description || 'Sem resumo disponível.'}</p>
         <a href="${n.url}" target="_blank">Ler notícia completa</a>
-        <small>Publicado em: ${new Date(n.publishedAt).toLocaleString()}</small>
+        <small>Publicado em: ${pubDate.toLocaleString()}</small>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
-// Atualiza notícias a cada 5 minutos sem remover antigas
+// Atualiza a cada 5 minutos sem remover notícias antigas
 carregarNoticias();
 setInterval(carregarNoticias, 300000);
 
