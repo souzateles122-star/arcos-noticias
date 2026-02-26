@@ -3,85 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notícias Brasil - Single Page</title>
+<title>Notícias Brasil Avançado</title>
 <style>
-/* Reset e fonte */
 * {margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body {background:#f9f9f9;color:#222;line-height:1.6;}
-header {background:#e60000;color:#fff;padding:20px 10%;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;}
-header h1{font-size:28px;}
-nav a{color:#fff;text-decoration:none;margin-left:20px;font-weight:bold;transition:opacity 0.3s;cursor:pointer;}
-nav a:hover{opacity:0.8;}
-main{width:80%;margin:20px auto;}
+body {background:#f9f9f9;color:#222;line-height:1.6;display:flex;}
+/* Barra lateral */
+aside {width:220px;background:#e60000;color:#fff;height:100vh;position:sticky;top:0;padding:20px;flex-shrink:0;}
+aside h2 {margin-bottom:20px;font-size:20px;text-align:center;}
+aside nav a {display:block;color:#fff;text-decoration:none;margin:10px 0;padding:10px;border-radius:5px;transition:0.3s;cursor:pointer;}
+aside nav a.active, aside nav a:hover {background:#b30000;}
+/* Conteúdo principal */
+main {flex:1;padding:20px;}
+header{display:flex;flex-direction:column;margin-bottom:20px;}
+header input[type="text"]{width:100%;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ccc;}
 section{display:none;margin-bottom:40px;animation:fadeIn 0.5s ease;}
 section.active{display:block;}
 @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 .hero-news{display:flex;gap:20px;margin-bottom:40px;}
-.hero-news img{width:100%;max-height:400px;object-fit:cover;border-radius:5px;}
+.hero-news img{width:100%;max-height:400px;object-fit:cover;border-radius:5px;transition:transform 0.3s;}
+.hero-news img:hover{transform:scale(1.05);}
 .hero-news .highlight{flex:2;}
 .hero-news .side-news{flex:1;display:flex;flex-direction:column;gap:15px;}
 .side-news article{display:flex;gap:10px;}
-.side-news img{width:100px;height:70px;object-fit:cover;border-radius:5px;}
+.side-news img{width:100px;height:70px;object-fit:cover;border-radius:5px;transition:transform 0.3s;}
+.side-news img:hover{transform:scale(1.2);}
 article{background:#fff;padding:15px;margin-bottom:20px;border-radius:5px;box-shadow:0 0 10px rgba(0,0,0,0.05);transition:transform 0.3s;}
 article:hover{transform:translateY(-3px);}
-article img{width:100%;max-height:200px;object-fit:cover;border-radius:5px;margin-bottom:10px;}
+article img{width:100%;max-height:200px;object-fit:cover;border-radius:5px;margin-bottom:10px;transition:transform 0.3s;}
+article img:hover{transform:scale(1.05);}
 h2{color:#e60000;margin-bottom:10px;}
-.categories{display:flex;flex-wrap:wrap;gap:15px;margin-bottom:30px;}
-.categories a{background:#e60000;color:#fff;padding:10px 15px;text-decoration:none;border-radius:20px;font-size:14px;transition:background-color 0.3s;}
-.categories a:hover{background:#b30000;}
-footer{background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:50px;}
-@media(max-width:768px){.hero-news{flex-direction:column}.side-news{flex-direction:row;overflow-x:auto}.side-news article{flex:0 0 auto;}}
+footer{background:#222;color:#fff;text-align:center;padding:25px 20px;margin-top:50px;flex-basis:100%;}
+@media(max-width:1024px){aside{display:none;} main{padding:10px;}}
 </style>
 </head>
 <body>
 
-<header>
-<h1>Notícias Brasil</h1>
+<aside>
+<h2>Seções</h2>
 <nav>
-<a onclick="showSection('home')">Home</a>
-<a onclick="showSection('brasil')">Brasil</a>
-<a onclick="showSection('mundo')">Mundo</a>
-<a onclick="showSection('economia')">Economia</a>
-<a onclick="showSection('esportes')">Esportes</a>
-<a onclick="showSection('cultura')">Cultura</a>
+<a data-section="home" class="active">Home</a>
+<a data-section="brasil">Brasil</a>
+<a data-section="mundo">Mundo</a>
+<a data-section="economia">Economia</a>
+<a data-section="esportes">Esportes</a>
+<a data-section="cultura">Cultura</a>
 </nav>
-</header>
+</aside>
 
 <main>
+<header>
+<input type="text" id="searchInput" placeholder="Pesquisar notícias...">
+</header>
 
 <!-- HOME -->
 <section id="home" class="active">
 <div class="hero-news">
 <div class="highlight">
 <article>
-<img src="https://images.generated.photos/wjMztA4aj2hD7c6k3BdLeEy5V1uXIVdpjN8c8Oq8t9s/rs:fit:512:512/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/5d1d9a9c-3e15-47a7-8d49-8d34f7fa1d56.png" alt="Destaque">
+<img src="https://picsum.photos/id/1011/800/400" alt="Destaque">
 <h2>Destaque do Brasil</h2>
 <p>Notícia principal com análise completa dos acontecimentos recentes.</p>
 </article>
 </div>
 <div class="side-news">
 <article>
-<img src="https://images.generated.photos/4ybcDuvBL7nQ2FPsF0IwI6PZ1pG_zM3gJHzrq6H1R4Y/rs:fit:100:70/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/e7c9f8a7-2023-40e5-8b2b-0b6c0d8338ab.png" alt="Lateral1">
+<img src="https://picsum.photos/id/1012/100/70" alt="Lateral1">
 <div><h2>Lateral 1</h2><p>Resumo rápido da notícia.</p></div>
 </article>
 <article>
-<img src="https://images.generated.photos/p0Zbql9U6qdkxN4p5gBvHJpKxNMFyA-TcuDFkp5fwS8/rs:fit:100:70/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/02e1b8f0-8d6e-4c47-bc7a-1e5d7d8c8c71.png" alt="Lateral2">
+<img src="https://picsum.photos/id/1013/100/70" alt="Lateral2">
 <div><h2>Lateral 2</h2><p>Resumo rápido da notícia.</p></div>
 </article>
 </div>
 </div>
 <h2>Últimas Notícias</h2>
 <article>
-<img src="https://images.generated.photos/9jhXxkT9c4Msk4AEmue0eD4k1O5tqHZMZB6a4Rp2cI0/rs:fit:800:400/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/03b5d7c4-6e42-4efc-913f-83f7d72c9b11.png" alt="Economia">
-<h2>Economia Cresce</h2><p>Setor tecnológico impulsiona crescimento e mercado financeiro reage.</p>
+<img src="https://picsum.photos/id/1020/800/400" alt="Economia">
+<h2>Economia Cresce</h2>
+<p>Setor tecnológico impulsiona crescimento e mercado financeiro reage.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/w6z0yFo_RvP1t5LQhY1xI8lU0VYtUGdL3VcPNfUowh0/rs:fit:800:400/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/1d4e7fbb-0e6f-4c2b-8dbd-4e3f5c9e1b7f.png" alt="Esportes">
-<h2>Seleção Brasileira</h2><p>Vitória emocionante em partida decisiva, trazendo o título para o Brasil.</p>
+<img src="https://picsum.photos/id/1021/800/400" alt="Esportes">
+<h2>Seleção Brasileira</h2>
+<p>Vitória emocionante em partida decisiva, trazendo o título para o Brasil.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/f2e8k3c9-1a2b-4b3f-9f7a-1a2c3d4e5f6g/rs:fit:800:400/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/abcdef12-3456-7890-abcd-ef1234567890.png" alt="Cultura">
-<h2>Festival de Cinema</h2><p>Cineastas nacionais e internacionais apresentam seus trabalhos em São Paulo.</p>
+<img src="https://picsum.photos/id/1022/800/400" alt="Cultura">
+<h2>Festival de Cinema</h2>
+<p>Cineastas nacionais e internacionais apresentam seus trabalhos em São Paulo.</p>
 </article>
 </section>
 
@@ -89,17 +98,17 @@ footer{background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:
 <section id="brasil">
 <h2>Notícias do Brasil</h2>
 <article>
-<img src="https://images.generated.photos/brasil_noticia_1.png" alt="Brasil 1">
+<img src="https://picsum.photos/id/1030/800/400" alt="Brasil 1">
 <h2>Política Nacional</h2>
 <p>Reformas aprovadas impactam economia e sociedade brasileira.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/brasil_noticia_2.png" alt="Brasil 2">
+<img src="https://picsum.photos/id/1031/800/400" alt="Brasil 2">
 <h2>Meio Ambiente</h2>
 <p>Projetos de preservação e sustentabilidade ganham força no país.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/brasil_noticia_3.png" alt="Brasil 3">
+<img src="https://picsum.photos/id/1032/800/400" alt="Brasil 3">
 <h2>Educação</h2>
 <p>Iniciativas inovadoras para melhorar ensino em escolas e universidades.</p>
 </article>
@@ -109,17 +118,17 @@ footer{background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:
 <section id="mundo">
 <h2>Notícias do Mundo</h2>
 <article>
-<img src="https://images.generated.photos/mundo_noticia_1.png" alt="Mundo 1">
+<img src="https://picsum.photos/id/1040/800/400" alt="Mundo 1">
 <h2>Conflitos Internacionais</h2>
 <p>Atualizações sobre conflitos e acordos diplomáticos globais.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/mundo_noticia_2.png" alt="Mundo 2">
+<img src="https://picsum.photos/id/1041/800/400" alt="Mundo 2">
 <h2>Economia Global</h2>
 <p>Mercados internacionais mostram crescimento e novos desafios.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/mundo_noticia_3.png" alt="Mundo 3">
+<img src="https://picsum.photos/id/1042/800/400" alt="Mundo 3">
 <h2>Cultura Internacional</h2>
 <p>Festivais e eventos culturais movimentam diferentes países.</p>
 </article>
@@ -129,12 +138,12 @@ footer{background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:
 <section id="economia">
 <h2>Economia</h2>
 <article>
-<img src="https://images.generated.photos/economia_1.png" alt="Economia 1">
+<img src="https://picsum.photos/id/1050/800/400" alt="Economia 1">
 <h2>Mercado Financeiro</h2>
 <p>Bolsa de valores reage às novas políticas e investimentos estrangeiros.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/economia_2.png" alt="Economia 2">
+<img src="https://picsum.photos/id/1051/800/400" alt="Economia 2">
 <h2>Tecnologia</h2>
 <p>Startups brasileiras atraem investimentos e aumentam inovação tecnológica.</p>
 </article>
@@ -144,12 +153,12 @@ footer{background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:
 <section id="esportes">
 <h2>Esportes</h2>
 <article>
-<img src="https://images.generated.photos/esportes_1.png" alt="Esportes 1">
+<img src="https://picsum.photos/id/1060/800/400" alt="Esportes 1">
 <h2>Futebol</h2>
 <p>Seleção Brasileira conquista campeonato com vitória emocionante.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/esportes_2.png" alt="Esportes 2">
+<img src="https://picsum.photos/id/1061/800/400" alt="Esportes 2">
 <h2>Vôlei</h2>
 <p>Time nacional vence competição internacional e comemora conquista.</p>
 </article>
@@ -159,18 +168,16 @@ footer{background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:
 <section id="cultura">
 <h2>Cultura</h2>
 <article>
-<img src="https://images.generated.photos/cultura_1.png" alt="Cultura 1">
+<img src="https://picsum.photos/id/1070/800/400" alt="Cultura 1">
 <h2>Festival de Cinema</h2>
 <p>Filmes nacionais e internacionais são exibidos e premiados.</p>
 </article>
 <article>
-<img src="https://images.generated.photos/cultura_2.png" alt="Cultura 2">
+<img src="https://picsum.photos/id/1071/800/400" alt="Cultura 2">
 <h2>Música</h2>
 <p>Shows e apresentações culturais movimentam cidades brasileiras.</p>
 </article>
 </section>
-
-</main>
 
 <footer>
 <p>© 2026 Notícias Brasil. Todos os direitos reservados. Inspirado no G1.</p>
@@ -178,12 +185,35 @@ footer{background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:
 </footer>
 
 <script>
-// Função para mostrar a seção desejada e esconder as outras
-function showSection(id){
-    const sections = document.querySelectorAll('main section');
-    sections.forEach(sec=>{sec.classList.remove('active');});
-    document.getElementById(id).classList.add('active');
-    window.scrollTo({top:0, behavior:'smooth'});
+// Função para trocar de seção
+const menuLinks = document.querySelectorAll('aside nav a');
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        const section = link.getAttribute('data-section');
+        document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById(section).classList.add('active');
+        menuLinks.forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+        window.scrollTo({top:0,behavior:'smooth'});
+        document.getElementById('searchInput').value = '';
+        filterNews('');
+    });
+});
+
+// Barra de pesquisa
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', (e)=>{
+    const query = e.target.value.toLowerCase();
+    filterNews(query);
+});
+
+function filterNews(query){
+    const activeSection = document.querySelector('main section.active');
+    const articles = activeSection.querySelectorAll('article');
+    articles.forEach(article=>{
+        const title = article.querySelector('h2').textContent.toLowerCase();
+        article.style.display = title.includes(query) ? 'block' : 'none';
+    });
 }
 </script>
 
