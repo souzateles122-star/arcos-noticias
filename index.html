@@ -5,156 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notícias Brasil</title>
     <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            background-color: #f9f9f9;
-            color: #222;
-            line-height: 1.6;
-        }
-
-        header {
-            background-color: #e60000;
-            color: #fff;
-            padding: 20px 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        header h1 {
-            font-size: 28px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: bold;
-            transition: opacity 0.3s;
-        }
-
-        nav a:hover {
-            opacity: 0.8;
-        }
-
-        main {
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        .hero-news {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-
-        .hero-news img {
-            width: 100%;
-            max-height: 400px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        .hero-news .highlight {
-            flex: 2;
-        }
-
-        .hero-news .side-news {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .side-news article {
-            display: flex;
-            gap: 10px;
-        }
-
-        .side-news img {
-            width: 100px;
-            height: 70px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-
-        article {
-            background-color: #fff;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-
-        article:hover {
-            transform: translateY(-3px);
-        }
-
-        article img {
-            width: 100%;
-            max-height: 200px;
-            object-fit: cover;
-            border-radius: 5px;
-            margin-bottom: 10px;
-        }
-
-        h2 {
-            color: #e60000;
-            margin-bottom: 10px;
-        }
-
-        .categories {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .categories a {
-            background-color: #e60000;
-            color: #fff;
-            padding: 10px 15px;
-            text-decoration: none;
-            border-radius: 20px;
-            font-size: 14px;
-            transition: background-color 0.3s;
-        }
-
-        .categories a:hover {
-            background-color: #b30000;
-        }
-
-        footer {
-            background-color: #222;
-            color: #fff;
-            text-align: center;
-            padding: 25px 10%;
-            margin-top: 50px;
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .hero-news {
-                flex-direction: column;
-            }
-
-            .side-news {
-                flex-direction: row;
-                overflow-x: auto;
-            }
-
-            .side-news article {
-                flex: 0 0 auto;
-            }
-        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif;}
+        body {background:#f9f9f9;color:#222;line-height:1.6;}
+        header {background:#e60000;color:#fff;padding:20px 10%;display:flex;justify-content:space-between;align-items:center;}
+        header h1 {font-size:28px;}
+        nav a {color:#fff;text-decoration:none;margin-left:20px;font-weight:bold;transition:opacity 0.3s;}
+        nav a:hover {opacity:0.8;}
+        main {width:80%;margin:20px auto;}
+        .hero-news {display:flex;gap:20px;margin-bottom:40px;}
+        .hero-news img {width:100%;max-height:400px;object-fit:cover;border-radius:5px;}
+        .hero-news .highlight {flex:2;}
+        .hero-news .side-news {flex:1;display:flex;flex-direction:column;gap:15px;}
+        .side-news article {display:flex;gap:10px;}
+        .side-news img {width:100px;height:70px;object-fit:cover;border-radius:5px;}
+        article {background:#fff;padding:15px;margin-bottom:20px;border-radius:5px;box-shadow:0 0 10px rgba(0,0,0,0.05);transition:transform 0.3s;}
+        article:hover {transform:translateY(-3px);}
+        article img {width:100%;max-height:200px;object-fit:cover;border-radius:5px;margin-bottom:10px;}
+        h2 {color:#e60000;margin-bottom:10px;}
+        .categories {display:flex;flex-wrap:wrap;gap:15px;margin-bottom:30px;}
+        .categories a {background:#e60000;color:#fff;padding:10px 15px;text-decoration:none;border-radius:20px;font-size:14px;transition:background-color 0.3s;}
+        .categories a:hover {background:#b30000;}
+        footer {background:#222;color:#fff;text-align:center;padding:25px 10%;margin-top:50px;}
+        @media (max-width:768px){.hero-news{flex-direction:column}.side-news{flex-direction:row;overflow-x:auto}.side-news article{flex:0 0 auto;}}
     </style>
 </head>
 <body>
@@ -171,25 +43,24 @@
     </header>
 
     <main>
-        <!-- Seção de notícias em destaque -->
         <section class="hero-news">
             <div class="highlight">
                 <article>
-                    <img src="https://via.placeholder.com/800x400" alt="Notícia em destaque">
+                    <img src="https://images.generated.photos/wjMztA4aj2hD7c6k3BdLeEy5V1uXIVdpjN8c8Oq8t9s/rs:fit:512:512/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/5d1d9a9c-3e15-47a7-8d49-8d34f7fa1d56.png" alt="Notícia em destaque">
                     <h2>Notícia em Destaque do Brasil</h2>
                     <p>Uma análise detalhada sobre os acontecimentos mais recentes no país, incluindo impactos sociais e econômicos.</p>
                 </article>
             </div>
             <div class="side-news">
                 <article>
-                    <img src="https://via.placeholder.com/100x70" alt="Notícia lateral 1">
+                    <img src="https://images.generated.photos/4ybcDuvBL7nQ2FPsF0IwI6PZ1pG_zM3gJHzrq6H1R4Y/rs:fit:100:70/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/e7c9f8a7-2023-40e5-8b2b-0b6c0d8338ab.png" alt="Notícia lateral 1">
                     <div>
                         <h2>Notícia Lateral 1</h2>
                         <p>Resumo rápido da notícia mais relevante.</p>
                     </div>
                 </article>
                 <article>
-                    <img src="https://via.placeholder.com/100x70" alt="Notícia lateral 2">
+                    <img src="https://images.generated.photos/p0Zbql9U6qdkxN4p5gBvHJpKxNMFyA-TcuDFkp5fwS8/rs:fit:100:70/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/02e1b8f0-8d6e-4c47-bc7a-1e5d7d8c8c71.png" alt="Notícia lateral 2">
                     <div>
                         <h2>Notícia Lateral 2</h2>
                         <p>Resumo rápido da notícia mais relevante.</p>
@@ -198,7 +69,6 @@
             </div>
         </section>
 
-        <!-- Categorias -->
         <section class="categories">
             <a href="#ultimas">Últimas Notícias</a>
             <a href="#brasil">Brasil</a>
@@ -210,36 +80,34 @@
             <a href="#saude">Saúde</a>
         </section>
 
-        <!-- Notícias recentes -->
         <section id="ultimas">
             <h2>Últimas Notícias</h2>
             <article>
-                <img src="https://via.placeholder.com/800x400" alt="Notícia recente 1">
+                <img src="https://images.generated.photos/9jhXxkT9c4Msk4AEmue0eD4k1O5tqHZMZB6a4Rp2cI0/rs:fit:800:400/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/03b5d7c4-6e42-4efc-913f-83f7d72c9b11.png" alt="Notícia recente 1">
                 <h2>Economia brasileira cresce no último trimestre</h2>
                 <p>Dados recentes mostram um crescimento consistente da economia, impulsionado pelo setor de tecnologia e serviços.</p>
             </article>
             <article>
-                <img src="https://via.placeholder.com/800x400" alt="Notícia recente 2">
+                <img src="https://images.generated.photos/w6z0yFo_RvP1t5LQhY1xI8lU0VYtUGdL3VcPNfUowh0/rs:fit:800:400/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/1d4e7fbb-0e6f-4c2b-8dbd-4e3f5c9e1b7f.png" alt="Notícia recente 2">
                 <h2>Esportes: Seleção Brasileira conquista título</h2>
                 <p>Após uma partida emocionante, a seleção nacional garantiu mais um título importante para o país.</p>
             </article>
             <article>
-                <img src="https://via.placeholder.com/800x400" alt="Notícia recente 3">
+                <img src="https://images.generated.photos/f2e8k3c9-1a2b-4b3f-9f7a-1a2c3d4e5f6g/rs:fit:800:400/czM6Ly9p/bWFnZXMvZ2VuZXJhbC9/abcdef12-3456-7890-abcd-ef1234567890.png" alt="Notícia recente 3">
                 <h2>Cultura: Festival de Cinema em São Paulo</h2>
                 <p>O festival reúne cineastas de todo o Brasil e promove debates sobre o cinema nacional.</p>
             </article>
         </section>
 
-        <!-- Notícias antigas -->
         <section id="arquivo">
             <h2>Notícias Antigas</h2>
             <article>
-                <img src="https://via.placeholder.com/800x400" alt="Notícia antiga 1">
+                <img src="https://images.generated.photos/old_news_1_placeholder.png" alt="Notícia antiga 1">
                 <h2>Reformas políticas importantes do passado</h2>
                 <p>Uma retrospectiva sobre as mudanças políticas que moldaram o Brasil moderno.</p>
             </article>
             <article>
-                <img src="https://via.placeholder.com/800x400" alt="Notícia antiga 2">
+                <img src="https://images.generated.photos/old_news_2_placeholder.png" alt="Notícia antiga 2">
                 <h2>Desastres naturais marcantes</h2>
                 <p>Recordando os eventos naturais que tiveram grande impacto no país.</p>
             </article>
@@ -248,7 +116,7 @@
 
     <footer>
         <p>© 2026 Notícias Brasil. Todos os direitos reservados.</p>
-        <p><a href="#" style="color:#fff; text-decoration:underline;">Política de Privacidade</a> | <a href="#" style="color:#fff; text-decoration:underline;">Contato</a></p>
+        <p><a href="#" style="color:#fff;text-decoration:underline;">Política de Privacidade</a> | <a href="#" style="color:#fff;text-decoration:underline;">Contato</a></p>
     </footer>
 </body>
 </html>
