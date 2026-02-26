@@ -3,10 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal Notícias Brasil</title>
-<meta name="description" content="Portal de notícias do Brasil com categorias, fotos e atualização automática.">
-<meta name="keywords" content="notícias Brasil, política, esportes, economia, tecnologia, saúde, educação">
-
+<title>Portal Notícias Brasil - Todas as notícias</title>
 <style>
 :root{
   --primary:#1e3a8a;
@@ -16,7 +13,6 @@
   --accent:#2563eb;
   --accent2:#f59e0b;
 }
-
 .dark{
   --bg:#0f172a;
   --card:#1e293b;
@@ -24,7 +20,6 @@
   --accent:#3b82f6;
   --accent2:#fbbf24;
 }
-
 body{
   margin:0;
   font-family:'Arial', Helvetica, sans-serif;
@@ -32,37 +27,29 @@ body{
   color:var(--text);
   transition:0.3s;
 }
-
 header{
   background:var(--primary);
   color:white;
   padding:25px;
   text-align:center;
-  box-shadow:0 4px 10px rgba(0,0,0,0.2);
 }
-
 header h1{
   margin:0;
-  font-size:2em;
 }
-
 button{
   padding:10px 15px;
   border:none;
   border-radius:6px;
   cursor:pointer;
-  margin-top:10px;
+  margin:5px;
 }
-
 .primary{
   background:var(--accent);
   color:white;
-  transition:0.3s;
 }
 .primary:hover{
   background:var(--accent2);
 }
-
 nav{
   display:flex;
   flex-wrap:wrap;
@@ -70,26 +57,17 @@ nav{
   gap:10px;
   margin:20px 0;
 }
-
-nav button{
-  background:var(--accent);
-  color:white;
-  font-weight:bold;
-}
-
 nav button.active{
   background:var(--accent2);
 }
-
 .container{
   max-width:1200px;
   margin:auto;
   padding:20px;
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:20px;
 }
-
 .card{
   background:var(--card);
   border-radius:12px;
@@ -100,7 +78,7 @@ nav button.active{
   transition:transform 0.3s, box-shadow 0.3s;
 }
 .card:hover{
-  transform: translateY(-5px) rotateX(1deg);
+  transform:translateY(-5px) rotateX(1deg);
   box-shadow:0 15px 25px rgba(0,0,0,0.25);
 }
 .card img{
@@ -135,7 +113,6 @@ nav button.active{
   margin-top:5px;
   display:block;
 }
-
 footer{
   text-align:center;
   padding:20px;
@@ -143,7 +120,6 @@ footer{
   color:white;
   margin-top:40px;
 }
-
 @media(max-width:600px){
   .container{
     grid-template-columns:1fr;
@@ -152,96 +128,102 @@ footer{
 </style>
 </head>
 <body>
-
 <header>
   <h1>📰 Portal Notícias Brasil</h1>
-  <p>Notícias reais do Brasil, atualizadas automaticamente</p>
+  <p>Notícias recentes e antigas, com fotos e categorias</p>
   <button onclick="toggleDark()">🌙 Modo Escuro</button>
 </header>
-
 <nav>
-  <button class="active" onclick="mudarCategoria('geral')">Geral</button>
+  <button class="active" onclick="mudarCategoria('todas')">Todas</button>
   <button onclick="mudarCategoria('politics')">Política</button>
   <button onclick="mudarCategoria('sports')">Esportes</button>
   <button onclick="mudarCategoria('business')">Economia</button>
   <button onclick="mudarCategoria('technology')">Tecnologia</button>
   <button onclick="mudarCategoria('health')">Saúde</button>
 </nav>
-
 <div class="container" id="noticias">
   <p>Carregando notícias...</p>
 </div>
-
 <footer>
   © 2026 Portal Notícias Brasil
 </footer>
 
 <script>
 // DARK MODE
-function toggleDark(){
-  document.body.classList.toggle("dark");
-}
+function toggleDark(){document.body.classList.toggle("dark");}
 
 // Categoria ativa
-let categoriaAtual = 'geral';
+let categoriaAtual = 'todas';
+// Armazena todas as notícias carregadas
+let todasNoticias = [];
 
 // Mudar categoria
 function mudarCategoria(categoria){
   categoriaAtual = categoria;
   document.querySelectorAll('nav button').forEach(btn=>{
     btn.classList.remove('active');
-    if(btn.textContent.toLowerCase() === categoria || (categoria==='geral' && btn.textContent==='Geral')) btn.classList.add('active');
+    if((categoria==='todas' && btn.textContent==='Todas') || btn.textContent.toLowerCase()===categoria) btn.classList.add('active');
   });
-  carregarNoticias();
+  renderizarNoticias();
 }
 
-// Função carregar notícias via NewsAPI (Brasil)
+// Carregar notícias da API NewsAPI
 async function carregarNoticias(){
-  const container = document.getElementById("noticias");
-  container.innerHTML = "<p>Atualizando notícias...</p>";
-  
   try{
-    let apiKey = "YOUR_API_KEY"; // substitua por sua chave do NewsAPI
-    let url = "";
+    let apiKey = "YOUR_API_KEY"; // substitua por sua chave NewsAPI
+    let categoriasAPI = ['politics','sports','business','technology','health'];
     
-    if(categoriaAtual==='geral'){
-      url = `https://newsapi.org/v2/top-headlines?country=br&pageSize=20&apiKey=${apiKey}`;
-    } else {
-      url = `https://newsapi.org/v2/top-headlines?country=br&category=${categoriaAtual}&pageSize=20&apiKey=${apiKey}`;
+    for(let cat of categoriasAPI){
+      let url = `https://newsapi.org/v2/top-headlines?country=br&category=${cat}&pageSize=50&apiKey=${apiKey}`;
+      let res = await fetch(url);
+      let data = await res.json();
+      if(data.articles) {
+        data.articles.forEach(n=>{n.categoria=cat; todasNoticias.push(n);});
+      }
     }
 
-    const res = await fetch(url);
-    const data = await res.json();
-    
-    if(data.articles && data.articles.length>0){
-      container.innerHTML = "";
-      data.articles.forEach(n=>{
-        container.innerHTML += `
-        <div class="card">
-          ${n.urlToImage ? `<img src="${n.urlToImage}" alt="Notícia">` : ""}
-          <div class="card-content">
-            <h2>${n.title}</h2>
-            <p>${n.description || 'Sem resumo disponível.'}</p>
-            <a href="${n.url}" target="_blank">Ler notícia completa</a>
-            <small>Publicado em: ${new Date(n.publishedAt).toLocaleString()}</small>
-          </div>
-        </div>
-        `;
-      });
-    } else {
-      container.innerHTML = "<p>Não há notícias disponíveis nesta categoria.</p>";
-    }
+    // Também carrega notícias gerais
+    let urlGeral = `https://newsapi.org/v2/top-headlines?country=br&pageSize=50&apiKey=${apiKey}`;
+    let resG = await fetch(urlGeral);
+    let dataG = await resG.json();
+    if(dataG.articles) dataG.articles.forEach(n=>{n.categoria='todas'; todasNoticias.push(n);});
 
-  } catch(err){
-    container.innerHTML = `<p>Erro ao carregar notícias: ${err}</p>`;
+    // Ordena todas por data decrescente
+    todasNoticias.sort((a,b)=> new Date(b.publishedAt)-new Date(a.publishedAt));
+    
+    renderizarNoticias();
+    
+  }catch(err){
+    document.getElementById("noticias").innerHTML = `<p>Erro ao carregar notícias: ${err}</p>`;
     console.error(err);
   }
 }
 
-// Atualiza cada 60 segundos
-carregarNoticias();
-setInterval(carregarNoticias, 60000);
-</script>
+// Renderizar notícias filtrando por categoria
+function renderizarNoticias(){
+  const container = document.getElementById("noticias");
+  let noticiasFiltradas = categoriaAtual==='todas' ? todasNoticias : todasNoticias.filter(n=>n.categoria===categoriaAtual);
+  if(noticiasFiltradas.length===0){
+    container.innerHTML = "<p>Não há notícias disponíveis nesta categoria.</p>";
+    return;
+  }
+  container.innerHTML = noticiasFiltradas.map(n=>`
+    <div class="card">
+      ${n.urlToImage ? `<img src="${n.urlToImage}" alt="Notícia">` : ""}
+      <div class="card-content">
+        <h2>${n.title}</h2>
+        <p>${n.description || 'Sem resumo disponível.'}</p>
+        <a href="${n.url}" target="_blank">Ler notícia completa</a>
+        <small>Publicado em: ${new Date(n.publishedAt).toLocaleString()}</small>
+      </div>
+    </div>
+  `).join('');
+}
 
+// Atualiza notícias a cada 5 minutos sem remover antigas
+carregarNoticias();
+setInterval(carregarNoticias, 300000);
+
+</script>
 </body>
 </html>
