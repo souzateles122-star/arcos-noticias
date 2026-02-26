@@ -3,23 +3,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Notícias Brasil - Manchetes Reais</title>
+<title>Portal de Notícias Atualizadas</title>
 <style>
+/* Reset e estilos globais */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{display:flex;background:#f9f9f9;color:#222;line-height:1.6;}
-aside{width:200px;background:#333;color:#fff;height:100vh;position:sticky;top:0;padding:20px;}
-aside h2{font-size:18px;margin-bottom:15px;}
-aside nav a{display:block;color:#fff;text-decoration:none;padding:8px;margin:5px 0;border-radius:4px;cursor:pointer;}
-aside nav a.active, aside nav a:hover{background:#555;}
+body{display:flex;min-height:100vh;background:#f4f4f4;color:#222;}
+/* Barra lateral */
+aside{width:220px;background:#2d2d2d;color:#fff;position:sticky;top:0;height:100vh;overflow:auto;padding:20px;}
+aside h2{font-size:20px;margin-bottom:15px;text-align:center;}
+aside nav a{display:block;color:#fff;text-decoration:none;padding:10px 12px;border-radius:4px;margin:4px 0;transition:0.3s;cursor:pointer;}
+aside nav a:hover,aside nav a.active{background:#444;}
+/* Conteúdo principal */
 main{flex:1;padding:20px;}
-header input{width:100%;padding:8px;margin-bottom:15px;border-radius:4px;border:1px solid #ccc;}
-section{display:none;margin-bottom:30px;}
+header{margin-bottom:15px;}
+header input{width:100%;padding:10px;border:1px solid #ccc;border-radius:5px;font-size:16px;}
+section{display:none;animation:fadeIn 0.4s ease;margin-bottom:30px;}
 section.active{display:block;}
-article{background:#fff;padding:15px;border-radius:6px;box-shadow:0 0 8px rgba(0,0,0,0.1);margin-bottom:20px;}
-article img{width:100%;height:200px;object-fit:cover;border-radius:6px;margin-bottom:10px;}
-article h3{color:#b00;margin-bottom:8px;font-size:20px;}
-footer{text-align:center;padding:15px;background:#222;color:#fff;border-top:1px solid #444;}
-@media(max-width:800px){aside{display:none;}main{padding:10px;}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.article-card{background:#fff;padding:18px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin-bottom:22px;transition:0.3s;}
+.article-card:hover{transform:translateY(-3px);}
+.article-card img{width:100%;height:240px;object-fit:cover;border-radius:5px;margin-bottom:10px;}
+.article-card h3{color:#b40000;font-size:22px;margin-bottom:8px;}
+.article-card p{font-size:16px;line-height:1.5;}
+footer{margin-top:40px;padding:15px;text-align:center;background:#222;color:#fff;border-radius:5px;}
+@media(max-width:900px){aside{display:none;}main{padding:10px;}}
 </style>
 </head>
 <body>
@@ -31,111 +38,116 @@ footer{text-align:center;padding:15px;background:#222;color:#fff;border-top:1px 
 <a data-section="brasil">Brasil</a>
 <a data-section="mundo">Mundo</a>
 <a data-section="politica">Política</a>
+<a data-section="economia">Economia</a>
 <a data-section="esportes">Esportes</a>
-<a data-section="saude">Saúde</a>
 </nav>
 </aside>
 
 <main>
 <header>
-<input type="text" id="searchInput" placeholder="Pesquisar notícias...">
+<input type="text" id="searchInput" placeholder="Pesquisar notícias por título...">
 </header>
 
 <!-- HOME -->
 <section id="home" class="active">
-<article>
-<img src="https://picsum.photos/800/300?random=101" alt="Brasil notícia">
-<h3>Deslizamento em Juiz de Fora deixa dezenas de mortos e desaparecidos</h3>
-<p>Uma grande avalanche de lama causada por chuvas intensas em Minas Gerais resultou em pelo menos 30 mortes e dezenas de desaparecidos. Autoridades declararam estado de calamidade e equipes de resgate continuam buscando sobreviventes enquanto moradores enfrentam perdas e destruição. :contentReference[oaicite:0]{index=0}</p>
-</article>
+<div class="article-card">
+<img src="https://picsum.photos/id/200/900/400" alt="Brasil e Índia acordo">
+<h3>Brasil e Índia anunciam cooperação em minerais estratégicos</h3>
+<p>Brasil e Índia assinaram um memorando para ampliar a cooperação em minerais críticos como terras raras, fortalecendo laços econômicos e tecnológicos. A parceria também inclui áreas como inteligência artificial e investimentos conjuntos. :contentReference[oaicite:0]{index=0}</p>
+</div>
 
-<article>
-<img src="https://picsum.photos/800/300?random=102" alt="Brasil notícia">
-<h3>Lei fortalece proteção a vítimas de violência de gênero no Brasil</h3>
-<p>O governo brasileiro promulgou uma lei reforçando medidas protetivas para mulheres vítimas de violência, incluindo restrições a abusadores e uso de dispositivos eletrônicos de alerta. Especialistas ressaltam a necessidade de políticas preventivas contínuas para reduzir casos de violência. :contentReference[oaicite:1]{index=1}</p>
-</article>
-
-<article>
-<img src="https://picsum.photos/800/300?random=103" alt="Esportes notícia">
-<h3>Roberto Carlos hospitalizado após procedimento preventivo</h3>
-<p>Lenda do futebol brasileiro, Roberto Carlos confirmou internamento para um procedimento médico preventivo relacionado a um coágulo nas pernas. A cirurgia foi bem‑sucedida e ele passa bem sob observação médica. :contentReference[oaicite:2]{index=2}</p>
-</article>
+<div class="article-card">
+<img src="https://picsum.photos/id/201/900/400" alt="Tarifas para aeronaves brasileiras">
+<h3>EUA eliminam tarifas sobre exportação de aeronaves brasileiras</h3>
+<p>Os Estados Unidos removeram tarifas sobre aeronaves brasileiras exportadas, beneficiando diretamente fabricantes como a Embraer e estimulando o setor aeroespacial do país. :contentReference[oaicite:1]{index=1}</p>
+</div>
 </section>
 
 <!-- BRASIL -->
 <section id="brasil">
-<article>
-<img src="https://picsum.photos/800/300?random=104" alt="Brasil notícia">
-<h3>Tragédia em Ubá: flash floods causam inundações e mortes</h3>
-<p>Tempestades intensas em Minas Gerais levaram enchentes que arrastaram caixões pelas ruas e causaram várias mortes e devastação, refletindo o aumento de eventos climáticos extremos no país. :contentReference[oaicite:3]{index=3}</p>
-</article>
+<div class="article-card">
+<img src="https://picsum.photos/id/202/900/400" alt="Segurança pública no Brasil">
+<h3>Organizações pedem reforma em políticas de segurança pública no Brasil</h3>
+<p>Relatório recente aponta a necessidade de novas estratégias de segurança para reduzir violência e abuso policial, destacando que milhares foram mortos em 2025 e que reformas são críticas para proteger direitos humanos. :contentReference[oaicite:2]{index=2}</p>
+</div>
+
+<div class="article-card">
+<img src="https://picsum.photos/id/203/900/400" alt="Pesquisa sobre corrupção">
+<h3>Pessoas e instituições denunciam estagnação no combate à corrupção</h3>
+<p>Relatórios recentes mostram o Brasil com pontuação baixa em índices de corrupção, com críticas sobre transparência e investigação de casos envolvendo figuras públicas e instituições. :contentReference[oaicite:3]{index=3}</p>
+</div>
 </section>
 
 <!-- MUNDO -->
 <section id="mundo">
-<article>
-<img src="https://picsum.photos/800/300?random=105" alt="Mundo notícia">
-<h3>Guerra e crises internacionais continuam afetando mercados</h3>
-<p>Conflitos e instabilidades em várias regiões do mundo seguem influenciando os mercados globais e políticas governamentais, aumentando a volatilidade e preocupações econômicas em diversos países.</p>
-</article>
+<div class="article-card">
+<img src="https://picsum.photos/id/204/900/400" alt="Conferências globais e tensões">
+<h3>Tensões globais e conferências de segurança dominam pautas mundiais</h3>
+<p>Encontros diplomáticos e debates sobre segurança internacional e economia são destaque em fóruns globais recentes, refletindo transformações geopolíticas importantes neste início de 2026. :contentReference[oaicite:4]{index=4}</p>
+</div>
 </section>
 
 <!-- POLÍTICA -->
 <section id="politica">
-<article>
-<img src="https://picsum.photos/800/300?random=106" alt="Política notícia">
-<h3>Investigação sobre operação policial letal no Rio de Janeiro</h3>
-<p>O governo brasileiro busca uma investigação independente sobre uma operação policial no Rio de Janeiro que resultou na morte de pelo menos 121 pessoas, incluindo civis, gerando debate intenso sobre uso de força e direitos humanos. :contentReference[oaicite:4]{index=4}</p>
-</article>
+<div class="article-card">
+<img src="https://picsum.photos/id/205/900/400" alt="Lula busca quarto mandato">
+<h3>Presidente Lula anuncia intenção de disputar quarto mandato</h3>
+<p>O presidente brasileiro Luiz Inácio Lula da Silva confirmou sua intenção de concorrer à reeleição em 2026, buscando um quarto mandato e prometendo continuidade de políticas sociais e econômicas. :contentReference[oaicite:5]{index=5}</p>
+</div>
 
-<article>
-<img src="https://picsum.photos/800/300?random=107" alt="Política notícia">
-<h3>Explosão em Brasília gera investigação de atentado</h3>
-<p>Uma explosão em Praça dos Três Poderes foi investigada como possível ataque extremista em Brasília, com mobilização de forças de segurança e busca por esclarecimentos sobre motivações e segurança nacional. :contentReference[oaicite:5]{index=5}</p>
-</article>
+<div class="article-card">
+<img src="https://picsum.photos/id/206/900/400" alt="Cenário político Bolsonaro">
+<h3>Flávio Bolsonaro é apresentado como sucessor político</h3>
+<p>Flávio Bolsonaro, filho do ex-presidente, declarou sua intenção de suceder no campo político, embora enfrente críticas e ceticismo de diversos setores. :contentReference[oaicite:6]{index=6}</p>
+</div>
+</section>
+
+<!-- ECONOMIA -->
+<section id="economia">
+<div class="article-card">
+<img src="https://picsum.photos/id/207/900/400" alt="Mercado financeiro e inflação">
+<h3>Banco Central revisa projeções de inflação e crescimento econômico</h3>
+<p>O Banco Central brasileiro elevou estimativas de inflação de longo prazo, refletindo um cenário econômico desafiador com perspectivas de crescimento moderado em 2026. :contentReference[oaicite:7]{index=7}</p>
+</div>
 </section>
 
 <!-- ESPORTES -->
 <section id="esportes">
-<article>
-<img src="https://picsum.photos/800/300?random=108" alt="Esportes notícia">
-<h3>Flamengo e International protagonizam decisões na Libertadores</h3>
-<p>Destaques esportivos recentes incluem partidas de alto impacto na Copa Libertadores, com grande público e disputas acirradas em estádios brasileiros. :contentReference[oaicite:6]{index=6}</p>
-</article>
-</section>
+<div class="article-card">
+<img src="https://picsum.photos/id/208/900/400" alt="Neymar declara possível aposentadoria">
+<h3>Neymar sugere aposentadoria até o fim de 2026</h3>
+<p>O astro do futebol Neymar disse que pode se aposentar ao final de 2026, após temporadas marcadas por lesões e com foco no retorno ao Santos e possibilidade de Copa do Mundo. :contentReference[oaicite:8]{index=8}</p>
+</div>
 
-<!-- SAÚDE -->
-<section id="saude">
-<article>
-<img src="https://picsum.photos/800/300?random=109" alt="Saúde notícia">
-<h3>Debate sobre saúde pública e medidas preventivas no Brasil</h3>
-<p>Autoridades de saúde continuam articulando campanhas de prevenção para diversas doenças, com foco em vacinação e atendimento básico nas regiões mais afetadas.</p>
-</article>
+<div class="article-card">
+<img src="https://picsum.photos/id/209/900/400" alt="Campeonato de skate em São Paulo">
+<h3>Campeonato Mundial de Skate acontece em São Paulo</h3>
+<p>São Paulo sediará o Skateboarding World Championships 2025 com participação de campeões olímpicos e grande estrutura para competições de alto nível. :contentReference[oaicite:9]{index=9}</p>
+</div>
 </section>
 
 <footer>
-<p>© 2026 Notícias Brasil – Conteúdo factual atualizado.</p>
+<p>© 2026 Portal de Notícias Atualizadas</p>
 </footer>
-
 </main>
 
 <script>
-// Navegação entre seções
-const links = document.querySelectorAll('aside nav a');
-links.forEach(link => link.addEventListener('click', () => {
-    const id = link.getAttribute('data-section');
-    document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    links.forEach(l => l.classList.remove('active'));
-    link.classList.add('active');
-}));
+// Menu de navegação
+document.querySelectorAll('aside nav a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+        document.getElementById(link.getAttribute('data-section')).classList.add('active');
+        document.querySelectorAll('aside nav a').forEach(l=>l.classList.remove('active'));
+        link.classList.add('active');
+    });
+});
 
-// Barra de pesquisa
+// Pesquisa por título
 document.getElementById('searchInput').addEventListener('input', e => {
     const q = e.target.value.toLowerCase();
-    document.querySelectorAll('main section.active article').forEach(article => {
-        const title = article.querySelector('h3').textContent.toLowerCase();
-        article.style.display = title.includes(q) ? 'block' : 'none';
+    document.querySelectorAll('main section.active .article-card').forEach(card => {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        card.style.display = title.includes(q)?'block':'none';
     });
 });
 </script>
