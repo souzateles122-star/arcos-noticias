@@ -1,156 +1,107 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Notícias Atualizadas</title>
-<style>
-/* Reset e estilos globais */
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
-body{display:flex;min-height:100vh;background:#f4f4f4;color:#222;}
-/* Barra lateral */
-aside{width:220px;background:#2d2d2d;color:#fff;position:sticky;top:0;height:100vh;overflow:auto;padding:20px;}
-aside h2{font-size:20px;margin-bottom:15px;text-align:center;}
-aside nav a{display:block;color:#fff;text-decoration:none;padding:10px 12px;border-radius:4px;margin:4px 0;transition:0.3s;cursor:pointer;}
-aside nav a:hover,aside nav a.active{background:#444;}
-/* Conteúdo principal */
-main{flex:1;padding:20px;}
-header{margin-bottom:15px;}
-header input{width:100%;padding:10px;border:1px solid #ccc;border-radius:5px;font-size:16px;}
-section{display:none;animation:fadeIn 0.4s ease;margin-bottom:30px;}
-section.active{display:block;}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-.article-card{background:#fff;padding:18px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.1);margin-bottom:22px;transition:0.3s;}
-.article-card:hover{transform:translateY(-3px);}
-.article-card img{width:100%;height:240px;object-fit:cover;border-radius:5px;margin-bottom:10px;}
-.article-card h3{color:#b40000;font-size:22px;margin-bottom:8px;}
-.article-card p{font-size:16px;line-height:1.5;}
-footer{margin-top:40px;padding:15px;text-align:center;background:#222;color:#fff;border-radius:5px;}
-@media(max-width:900px){aside{display:none;}main{padding:10px;}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Brasil Notícias</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+        header { background: #222; color: #fff; padding: 20px 0; text-align: center; }
+        nav a { margin: 0 15px; color: #fff; text-decoration: none; font-weight: bold; }
+        .container { width: 90%; margin: 20px auto; }
+        .section-title { font-size: 1.8em; margin-bottom: 10px; color: #333; }
+        .news-item { border-bottom: 1px solid #ccc; padding: 15px 0; }
+        .news-item h3 { margin: 0 0 5px; color: #0056b3; }
+        .news-item p { margin: 0; color: #555; }
+        footer { text-align: center; padding: 15px 0; background: #222; color: #fff; margin-top: 30px; }
+    </style>
 </head>
 <body>
 
-<aside>
-<h2>Seções</h2>
-<nav>
-<a data-section="home" class="active">Home</a>
-<a data-section="brasil">Brasil</a>
-<a data-section="mundo">Mundo</a>
-<a data-section="politica">Política</a>
-<a data-section="economia">Economia</a>
-<a data-section="esportes">Esportes</a>
-</nav>
-</aside>
-
-<main>
 <header>
-<input type="text" id="searchInput" placeholder="Pesquisar notícias por título...">
+    <h1>Portal Brasil Notícias</h1>
+    <nav>
+        <a href="#atual">Últimas Notícias</a>
+        <a href="#historia">História do Brasil</a>
+        <a href="#arquivo">Arquivo & Curiosidades</a>
+    </nav>
 </header>
 
-<!-- HOME -->
-<section id="home" class="active">
-<div class="article-card">
-<img src="https://picsum.photos/id/200/900/400" alt="Brasil e Índia acordo">
-<h3>Brasil e Índia anunciam cooperação em minerais estratégicos</h3>
-<p>Brasil e Índia assinaram um memorando para ampliar a cooperação em minerais críticos como terras raras, fortalecendo laços econômicos e tecnológicos. A parceria também inclui áreas como inteligência artificial e investimentos conjuntos. :contentReference[oaicite:0]{index=0}</p>
-</div>
+<div class="container">
 
-<div class="article-card">
-<img src="https://picsum.photos/id/201/900/400" alt="Tarifas para aeronaves brasileiras">
-<h3>EUA eliminam tarifas sobre exportação de aeronaves brasileiras</h3>
-<p>Os Estados Unidos removeram tarifas sobre aeronaves brasileiras exportadas, beneficiando diretamente fabricantes como a Embraer e estimulando o setor aeroespacial do país. :contentReference[oaicite:1]{index=1}</p>
-</div>
-</section>
+    <!-- Seção de Notícias Atuais -->
+    <section id="atual">
+        <h2 class="section-title">📰 Últimas Notícias (Atual)</h2>
 
-<!-- BRASIL -->
-<section id="brasil">
-<div class="article-card">
-<img src="https://picsum.photos/id/202/900/400" alt="Segurança pública no Brasil">
-<h3>Organizações pedem reforma em políticas de segurança pública no Brasil</h3>
-<p>Relatório recente aponta a necessidade de novas estratégias de segurança para reduzir violência e abuso policial, destacando que milhares foram mortos em 2025 e que reformas são críticas para proteger direitos humanos. :contentReference[oaicite:2]{index=2}</p>
-</div>
+        <div class="news-item">
+            <h3>Justiça condena responsáveis pelo assassinato de Marielle Franco</h3>
+            <p>Em fevereiro de 2026, o Supremo Tribunal Federal do Brasil condenou irmãos políticos e ex‑policiais pela morte da vereadora e ativista Marielle Franco em 2018, determinando penas acima de 76 anos de prisão e marcando um importante capítulo na luta contra a violência política no país. :contentReference[oaicite:0]{index=0}</p>
+        </div>
 
-<div class="article-card">
-<img src="https://picsum.photos/id/203/900/400" alt="Pesquisa sobre corrupção">
-<h3>Pessoas e instituições denunciam estagnação no combate à corrupção</h3>
-<p>Relatórios recentes mostram o Brasil com pontuação baixa em índices de corrupção, com críticas sobre transparência e investigação de casos envolvendo figuras públicas e instituições. :contentReference[oaicite:3]{index=3}</p>
-</div>
-</section>
+        <div class="news-item">
+            <h3>Protestos indígenas levam Lula a revogar decreto sobre hidrovias</h3>
+            <p>Após 33 dias de protestos indígenas no Pará, o governo federal revogou um decreto que permitia concessões privadas para hidrovias na Amazônia, reconhecendo riscos ambientais e pressionado por lideranças indígenas. :contentReference[oaicite:1]{index=1}</p>
+        </div>
 
-<!-- MUNDO -->
-<section id="mundo">
-<div class="article-card">
-<img src="https://picsum.photos/id/204/900/400" alt="Conferências globais e tensões">
-<h3>Tensões globais e conferências de segurança dominam pautas mundiais</h3>
-<p>Encontros diplomáticos e debates sobre segurança internacional e economia são destaque em fóruns globais recentes, refletindo transformações geopolíticas importantes neste início de 2026. :contentReference[oaicite:4]{index=4}</p>
-</div>
-</section>
+        <div class="news-item">
+            <h3>Deslizamentos em Minas Gerais deixam dezenas de mortos</h3>
+            <p>Chuvas intensas causaram deslizamentos em Juiz de Fora e Ubá, em Minas Gerais, resultando em dezenas de mortos e dezenas de desaparecidos, enquanto o governo federal declarou situação de calamidade pública. :contentReference[oaicite:2]{index=2}</p>
+        </div>
 
-<!-- POLÍTICA -->
-<section id="politica">
-<div class="article-card">
-<img src="https://picsum.photos/id/205/900/400" alt="Lula busca quarto mandato">
-<h3>Presidente Lula anuncia intenção de disputar quarto mandato</h3>
-<p>O presidente brasileiro Luiz Inácio Lula da Silva confirmou sua intenção de concorrer à reeleição em 2026, buscando um quarto mandato e prometendo continuidade de políticas sociais e econômicas. :contentReference[oaicite:5]{index=5}</p>
-</div>
+    </section>
 
-<div class="article-card">
-<img src="https://picsum.photos/id/206/900/400" alt="Cenário político Bolsonaro">
-<h3>Flávio Bolsonaro é apresentado como sucessor político</h3>
-<p>Flávio Bolsonaro, filho do ex-presidente, declarou sua intenção de suceder no campo político, embora enfrente críticas e ceticismo de diversos setores. :contentReference[oaicite:6]{index=6}</p>
-</div>
-</section>
+    <!-- Seção de Notícias Históricas -->
+    <section id="historia">
+        <h2 class="section-title">📜 Notícias Históricas / Eventos Importantes</h2>
 
-<!-- ECONOMIA -->
-<section id="economia">
-<div class="article-card">
-<img src="https://picsum.photos/id/207/900/400" alt="Mercado financeiro e inflação">
-<h3>Banco Central revisa projeções de inflação e crescimento econômico</h3>
-<p>O Banco Central brasileiro elevou estimativas de inflação de longo prazo, refletindo um cenário econômico desafiador com perspectivas de crescimento moderado em 2026. :contentReference[oaicite:7]{index=7}</p>
-</div>
-</section>
+        <div class="news-item">
+            <h3>Independência do Brasil (1822)</h3>
+            <p>O Brasil declarou sua independência de Portugal em 7 de setembro de 1822, evento que culminou na formação do Império do Brasil sob o comando de Dom Pedro I e é lembrado como marco fundador da nação. :contentReference[oaicite:3]{index=3}</p>
+        </div>
 
-<!-- ESPORTES -->
-<section id="esportes">
-<div class="article-card">
-<img src="https://picsum.photos/id/208/900/400" alt="Neymar declara possível aposentadoria">
-<h3>Neymar sugere aposentadoria até o fim de 2026</h3>
-<p>O astro do futebol Neymar disse que pode se aposentar ao final de 2026, após temporadas marcadas por lesões e com foco no retorno ao Santos e possibilidade de Copa do Mundo. :contentReference[oaicite:8]{index=8}</p>
-</div>
+        <div class="news-item">
+            <h3>Revolução de 1930</h3>
+            <p>A Revolução de 1930 foi uma insurreição armada que pôs fim à Primeira República brasileira e levou Getúlio Vargas ao poder, alterando profundamente a política nacional na primeira metade do século XX. :contentReference[oaicite:4]{index=4}</p>
+        </div>
 
-<div class="article-card">
-<img src="https://picsum.photos/id/209/900/400" alt="Campeonato de skate em São Paulo">
-<h3>Campeonato Mundial de Skate acontece em São Paulo</h3>
-<p>São Paulo sediará o Skateboarding World Championships 2025 com participação de campeões olímpicos e grande estrutura para competições de alto nível. :contentReference[oaicite:9]{index=9}</p>
+        <div class="news-item">
+            <h3>Batalha da Praça da Sé (1934)</h3>
+            <p>O conflito entre integralistas e antifascistas em São Paulo em 1934 simbolizou tensões políticas crescentes no país, com confrontos e feridos nas ruas da capital paulista. :contentReference[oaicite:5]{index=5}</p>
+        </div>
+
+        <div class="news-item">
+            <h3>Canal 100: Cinejornais icônicos</h3>
+            <p>O Canal 100, criado em 1959, foi um cinejornal brasileiro exibido nos cinemas e registrou momentos culturais e esportivos importantes do país, deixando um legado histórico audiovisual. :contentReference[oaicite:6]{index=6}</p>
+        </div>
+
+    </section>
+
+    <!-- Seção de Arquivo & Curiosidades -->
+    <section id="arquivo">
+        <h2 class="section-title">📦 Arquivo & Curiosidades</h2>
+
+        <div class="news-item">
+            <h3>Diario de Pernambuco: quase 200 anos de história</h3>
+            <p>O Diário de Pernambuco, fundado em 1825, é reconhecido como um dos jornais mais antigos em circulação na América Latina e seu arquivo histórico está em processo de preservação. :contentReference[oaicite:7]{index=7}</p>
+        </div>
+
+        <div class="news-item">
+            <h3>Dia da Consciência Negra</h3>
+            <p>Celebrado em 20 de novembro, o Dia da Consciência Negra homenageia Zumbi dos Palmares e é uma data nacional voltada à reflexão sobre a contribuição afro‑brasileira e a luta contra o racismo. :contentReference[oaicite:8]{index=8}</p>
+        </div>
+
+        <div class="news-item">
+            <h3>Folha de S.Paulo: 100 anos de história</h3>
+            <p>O jornal Folha de S.Paulo celebrou seu centenário com um acervo histórico que retrata os principais acontecimentos do século XX no Brasil, reforçando a importância do jornalismo nacional. :contentReference[oaicite:9]{index=9}</p>
+        </div>
+
+    </section>
+
 </div>
-</section>
 
 <footer>
-<p>© 2026 Portal de Notícias Atualizadas</p>
+    <p>© 2026 Portal Brasil Notícias — Todos os direitos reservados.</p>
 </footer>
-</main>
-
-<script>
-// Menu de navegação
-document.querySelectorAll('aside nav a').forEach(link => {
-    link.addEventListener('click', () => {
-        document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
-        document.getElementById(link.getAttribute('data-section')).classList.add('active');
-        document.querySelectorAll('aside nav a').forEach(l=>l.classList.remove('active'));
-        link.classList.add('active');
-    });
-});
-
-// Pesquisa por título
-document.getElementById('searchInput').addEventListener('input', e => {
-    const q = e.target.value.toLowerCase();
-    document.querySelectorAll('main section.active .article-card').forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        card.style.display = title.includes(q)?'block':'none';
-    });
-});
-</script>
 
 </body>
 </html>
