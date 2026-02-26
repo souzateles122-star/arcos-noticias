@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Portal Arcos Notícias - Minas Gerais</title>
-<meta name="description" content="Portal automático de notícias reais de Arcos MG e Minas Gerais, atualizado em tempo real.">
+<meta name="description" content="Portal automático de notícias reais de Arcos MG e Minas Gerais, atualizado em tempo real. Inclui notícias recentes e antigas.">
 <meta name="keywords" content="Arcos MG, notícias Minas Gerais, portal de notícias, RSS, atualizações, política, esportes, economia">
 
 <style>
@@ -106,6 +106,7 @@ button{
 .category.Esportes{background:#16a34a;}
 .category.Economia{background:#f59e0b;}
 .category.Educação{background:#2563eb;}
+.category.Outros{background:#6b7280;}
 
 small{
   color:gray;
@@ -130,7 +131,7 @@ footer{
 
 <header>
   <h1>📰 Portal Arcos Notícias</h1>
-  <p>Notícias reais de Arcos MG e Minas Gerais, atualizadas automaticamente</p>
+  <p>Notícias reais de Arcos MG e Minas Gerais, incluindo antigas e recentes</p>
   <button onclick="toggleDark()">🌙 Modo Escuro</button>
 </header>
 
@@ -190,12 +191,12 @@ async function buscarNoticias() {
     (item.description && item.description.toLowerCase().includes("arcos"))
   );
 
-  // Ordenar por data
+  // Ordenar por data (mais recentes primeiro)
   noticiasArcos.sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
 
-  // Renderizar
+  // Renderizar todas, incluindo antigas
   if(noticiasArcos.length === 0){
-    container.innerHTML = "<p>Não há notícias recentes de Arcos MG no momento.</p>";
+    container.innerHTML = "<p>Não há notícias de Arcos MG no momento.</p>";
     return;
   }
 
@@ -214,7 +215,7 @@ async function buscarNoticias() {
   });
 }
 
-// Atualiza a cada 60 segundos
+// Atualiza a cada 60 segundos (mantém notícias antigas também)
 buscarNoticias();
 setInterval(buscarNoticias, 60000);
 </script>
